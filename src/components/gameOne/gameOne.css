@@ -1,0 +1,57 @@
+#tic-tac-toe-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    background-color: #c3195d;
+    height: 100vh;
+    margin-top: 0;
+}
+#tic-tac-toe-title {
+    font-size: 6vw;
+    text-align: center;
+    color: limegreen;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#table {
+    border-collapse: collapse;
+    width: 40vw;
+    height: 40vh;
+    align-self: center;
+    margin-top: 2em;
+}
+td {
+    border: 2px solid seagreen;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 40px;
+    cursor: pointer;
+}
+#cell-0-0, #cell-0-1, #cell-0-2 {
+    border-top: none;
+}
+#cell-0-0, #cell-1-0, #cell-2-0 {
+    border-left: none;
+}
+#cell-0-2, #cell-1-2, #cell-2-2 {
+    border-right: none;
+}
+#cell-2-0, #cell-2-1, #cell-2-2 {
+    border-bottom: none;
+}
+#winner-container {
+    display: flex;
+    flex-direction: column;
+}
+#winner-text, #current-player {
+    align-self: center;
+    font-size: 2.6vw;
+    margin-top: 1em;
+}
+#new-game-button {
+    width: 16vw;
+    align-self: center;
+    padding: 0.5em;
+    margin-top: 1.5em;
+    background-color: limegreen;
+}
