@@ -4,7 +4,7 @@ import './gameTwo.css'
 function gameTwo() {
 
 const [ isPlaying, setIsPlaying ] = useState(false);
-const [ isComputerNumberGame, setIsGuessComputerNumberGame ] = useState(false);
+const [ isComputerNumberGame, setIsComputerNumberGame ] = useState(false);
 const [ isPlayerNumberGame, setIsPlayerNumberGame ] = useState(false);
 const [ computersNumber, setComputersNumber ] = useState('');
 const [ playersNumberGuess, setPlayersNumberGuess ] = useState('');
@@ -15,7 +15,7 @@ const guessComputerNumber = () => {
   setIsPlaying(true);
   console.log('guess computer number function activated')
 
-  setIsGuessComputerNumberGame(true);
+  setIsComputerNumberGame(true);
 
   const newComputerNumber = (Math.floor(Math.random()*101));
   setComputersNumber(newComputerNumber);
@@ -46,7 +46,7 @@ const handleFormSubmit = e => {
 const highOrLow = () => {
   console.log(typeof(playersNumberGuess),'this is  players number')
   console.log(typeof(computersNumber), 'this is computer')
-
+//TODO set if else for when user does more than 100 and less the 1
 
   if(playersNumberGuess == ''){
     return null
@@ -73,11 +73,10 @@ const highOrLow = () => {
 };
 
 const playAgain = () => {
-  console.log("This will reset all the useStates to start the game again from choosing to play computer or computer playing you")
-}
-
-const computerGuessUserNumber = () => {
-  console.log('This is for the computer to guess the users number logic')
+  setIsPlaying(false);
+  setIsComputerNumberGame(false);
+  setComputersNumber('');
+  setPlayersNumberGuess('');
 }
 
   return (
@@ -135,5 +134,5 @@ const computerGuessUserNumber = () => {
     </div>
   )
 }
-
+//TODO so I think I will do the player number game in another file below this one
 export default gameTwo
