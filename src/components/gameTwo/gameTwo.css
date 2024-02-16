@@ -1,0 +1,18 @@
+#number-guesser-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+#number-guesser-title {
+
+}
+#number-guesser-content {
+    display: flex;
+    border: 2px solid black;
+    box-shadow: inset 1px 1px 1px darkgray, 4px 4px 4px darkgray;
+    width: 70%;
+    height: 40%;
+    padding: 2.5%;
+}

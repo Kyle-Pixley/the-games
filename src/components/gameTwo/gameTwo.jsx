@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import './gameTwo.css'
+import PlayerNumberGuesser from './playerNumberGuesser';
+import './gameTwo.css';
 
 function gameTwo() {
 
@@ -22,10 +23,6 @@ const guessComputerNumber = () => {
 };
 
 useEffect(() => {
-  console.log(computersNumber)
-}, [computersNumber])
-
-useEffect(() => {
   if(playersNumberGuess !== ''){
     console.log(playersNumberGuess)
     
@@ -33,23 +30,33 @@ useEffect(() => {
 }, [playersNumberGuess])
 
 const guessPlayerNumber = () => {
-  setIsPlaying(true)
+  setIsPlaying(true);
+  setIsPlayerNumberGame(true);
 }
 
 const handleFormSubmit = e => {
   e.preventDefault();
   console.log("Form submit button hit");
   setPlayersNumberGuess(Number(e.target.playerGuess.value))
-  // isComputerNumberGame ? userGuessComputerNumber() : computerGuessUserNumber();
 }
 
 const highOrLow = () => {
-  console.log(typeof(playersNumberGuess),'this is  players number')
-  console.log(typeof(computersNumber), 'this is computer')
-//TODO set if else for when user does more than 100 and less the 1
+  //! don't forget to take this out
+  console.log(computersNumber)
+  //!==============================
 
-  if(playersNumberGuess == ''){
+  if(playersNumberGuess === ''){
+    console.log('this')
     return null
+  } else if(playersNumberGuess > 100){
+    return (
+      <h3>{playersNumberGuess + ' is more than 100. Guess a number lower than 101 and more than 0.'}</h3>
+    )
+  } else if(playersNumberGuess <= 0) {
+    //todo needs fixing ^^^^
+    return ( 
+      <h3>{playersNumberGuess + ' is less than 1. Guess a number lower than 101 and more than 0.'}</h3>
+    )
   } else if(playersNumberGuess > computersNumber){
     return (
       <h3>Lower</h3>
@@ -67,7 +74,7 @@ const highOrLow = () => {
     )
   } else {
     return (
-      <h3>I am sorry what?</h3>
+      <h3>I am sorry what? Make sure you are entering a whole number.</h3>
     )
   }
 };
@@ -82,12 +89,14 @@ const playAgain = () => {
   return (
     <div id='number-guesser-container'>
       <h1 id='number-guesser-title'>Number Guesser</h1>
+      <div id='number-guesser-content'>
+
       <h4 id='computer-or-player'>
         { !isPlaying ?
         (
           "Would you like to guess a number I am thinking of or would you like me to guess your number?"
-        )
-        : null }
+          )
+          : null }
       </h4>
 
       {isPlaying ? (
@@ -130,7 +139,9 @@ const playAgain = () => {
         </div>
       ) : (
         null
-      )}
+        )}
+      {isPlayerNumberGame ? <PlayerNumberGuesser isPlaying={isPlaying} /> : null }
+        </div>
     </div>
   )
 }

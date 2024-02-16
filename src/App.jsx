@@ -22,6 +22,7 @@ function App() {
         id='home-nav-button'
         >
           Home
+          {activeComponent === 'home' && <span className='underline'></span>}
         </button>
 
         <button 
@@ -30,6 +31,7 @@ function App() {
         id='game-one-nav-button'
         >
         Tic Tac Toe
+        {activeComponent === 'game-one' && <span className='underline'></span>}
         </button>
 
         <button
@@ -37,7 +39,8 @@ function App() {
         className='nav-buttons'
         id='game-two-nav-button'
         >
-          Game two
+          Number Guesser
+          {activeComponent === 'game-two' && <span className='underline'></span>}
         </button>
 
       </div>

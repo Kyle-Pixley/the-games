@@ -4,9 +4,11 @@
     margin-top: 1em;
     background-color: #c3195d;
     height: 100vh;
+    width: 85%;
     margin-top: 0;
 }
 #tic-tac-toe-title {
+    margin-top: 1em;
     font-size: 6vw;
     text-align: center;
     color: limegreen;
