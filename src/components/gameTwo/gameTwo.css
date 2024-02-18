@@ -3,16 +3,96 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    width: 85%;
+    background-color: #ffb5b5;
 }
 #number-guesser-title {
-
+    font-size: 8vh;
+    font-family: Arial, Helvetica, sans-serif;
+    
 }
 #number-guesser-content {
     display: flex;
     border: 2px solid black;
-    box-shadow: inset 1px 1px 1px darkgray, 4px 4px 4px darkgray;
-    width: 70%;
-    height: 40%;
-    padding: 2.5%;
+    box-shadow: inset 5px 5px 10px #b2ffff, 10px 10px 5px #cc8282;
+    width: 65%;
+    height: 45%;
+    padding: 2%;
+    align-items: center;
+    background-color: aquamarine;
+}
+#game-choose-container {
+    display: flex;
+    flex-direction: column;
+}
+#computer-or-player-text, #computer-number-intro-text {
+    font-size: 3.5vh;
+    align-self: center;
+    text-align: center;
+    margin-bottom: 5vh;
+}
+#button-container {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.guess-number-buttons {
+    height: fit-content;
+    padding: 1em 2em;
+    font-size: 100%;
+    font-weight: 600;
+}
+#computer-number-game-container, #high-or-low-response-container  {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+#computer-number-intro-text {
+    font-size: 2.5vw;
+}
+#guess-computer-number-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#guess-computer-number-input {
+    font-size: 4vh;
+    height: 6vh;
+    font-weight: 600;
+    padding-left: 4px;
+    min-width: 75px;
+}
+#guess-computer-number-submit {
+    height: 4em;
+    width: 25%;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 2em;
+    margin-bottom: -4vh;
+    kerning: auto;
+}
+#high-or-low-response-container {
+    justify-content: center;
+    margin-bottom: 25px;
+}
+#guess-response {
+    
+}
+#win-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+#win-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8vw;
+}
+#play-again-button {
+    height: 4em;
+    width: 14em;
+    align-self: center;
+    margin-top: 5vh;
+    margin-bottom: -5vh;
 }

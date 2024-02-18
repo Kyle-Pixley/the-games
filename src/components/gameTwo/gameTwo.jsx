@@ -9,7 +9,15 @@ const [ isComputerNumberGame, setIsComputerNumberGame ] = useState(false);
 const [ isPlayerNumberGame, setIsPlayerNumberGame ] = useState(false);
 const [ computersNumber, setComputersNumber ] = useState('');
 const [ playersNumberGuess, setPlayersNumberGuess ] = useState('');
+const [ inputGrowSize, setInputGrowSize ] = useState('');
+const [ isWin, setIsWin ] = useState(false);
 
+const inputStyle = {
+  width: `${inputGrowSize.length * 22}px`,
+};
+const handleGrow = (e) => {
+  setInputGrowSize(e.target.value)
+};
 
 
 const guessComputerNumber = () => {
@@ -50,27 +58,30 @@ const highOrLow = () => {
     return null
   } else if(playersNumberGuess > 100){
     return (
-      <h3>{playersNumberGuess + ' is more than 100. Guess a number lower than 101 and more than 0.'}</h3>
+      <h3 id='guess-response'>{playersNumberGuess + ' is more than 100. Guess a number lower than 101 and more than 0.'}</h3>
     )
   } else if(playersNumberGuess <= 0) {
     //todo needs fixing ^^^^
     return ( 
-      <h3>{playersNumberGuess + ' is less than 1. Guess a number lower than 101 and more than 0.'}</h3>
+      <h3 id='guess-response'>{playersNumberGuess + ' is less than 1. Guess a number lower than 101 and more than 0.'}</h3>
     )
   } else if(playersNumberGuess > computersNumber){
     return (
-      <h3>Lower</h3>
+      <h3 id='guess-response'>Lower</h3>
     )
   } else if(playersNumberGuess < computersNumber){
     return (
-      <h3>Higher</h3>
+      <h3 id='guess-response'>Higher</h3>
     )
   } else if(playersNumberGuess === computersNumber){
     return (
-      <>
-        <h3>You Got it!!!</h3>
-        <button onClick={playAgain}>Play Again?</button>
-      </>
+      <div id='win-container'>
+        <h3 id='win-title'>You Got it!!!</h3>
+        <button id='play-again-button' 
+          onClick={playAgain}>
+          Play Again?
+        </button>
+      </div>
     )
   } else {
     return (
@@ -79,11 +90,20 @@ const highOrLow = () => {
   }
 };
 
+useEffect(() => {
+  console.log(`is win is ${isWin}`)
+  if (playersNumberGuess === computersNumber && playersNumberGuess !== '') {
+    setIsWin(true);
+  }
+  
+}, [playersNumberGuess, computersNumber]);
+
 const playAgain = () => {
   setIsPlaying(false);
   setIsComputerNumberGame(false);
   setComputersNumber('');
   setPlayersNumberGuess('');
+  setIsWin(false);
 }
 
   return (
@@ -94,46 +114,55 @@ const playAgain = () => {
       <h4 id='computer-or-player'>
         { !isPlaying ?
         (
-          "Would you like to guess a number I am thinking of or would you like me to guess your number?"
+          <div id='game-choose-container'>
+            <p id='computer-or-player-text'>
+            Would you like to guess a number I am thinking of or would you like me to guess your number?
+            </p>
+            <div id='button-container'>
+            <button id='guess-computer-number-button'
+            className='guess-number-buttons'
+            onClick={() => guessComputerNumber()}>
+              Guess computer number
+            </button>
+            <button id='guess-player-number-button'
+            className='guess-number-buttons'
+            onClick={() => guessPlayerNumber()}>
+              Guess player number
+            </button>
+            </div>
+          </div>
           )
           : null }
       </h4>
 
-      {isPlaying ? (
-        null
-        ) : (
-          <div id='button-container'>
-        <button id='guess-computer-number-button'
-        onClick={() => guessComputerNumber()}>
-          Guess computer number
-        </button>
-        <button id='guess-player-number-button'
-        onClick={() => guessPlayerNumber()}>
-          Guess player number
-        </button>
-      </div>
-        )
-      }
-
       {isComputerNumberGame ? (
-        <div>
-          <h2>
-            Ok I am thinking of a number between 1 and 100.  Let's see if you can guess what it is.
-          </h2>
-          
-          <form onSubmit={handleFormSubmit}>
+        <div id='computer-number-game-container'>
+          {isWin ? null :
+            (
+              <>
+                <h2 id='computer-number-intro-text'>
+                  Ok I am thinking of a number between 1 and 100.  Let's see if you can guess what it is.
+                </h2>
 
-            <input id='guess-computer-number-input'
-            type='number'
-            name='playerGuess'>
-            </input>
+                  <form id='guess-computer-number-form' onSubmit={handleFormSubmit}>
 
-            <button type='submit' id='guess-computer-number-submit'>
-              GUESS
-            </button>
-          </form>
+                    <input
+                      id='guess-computer-number-input'
+                      style={inputStyle}
+                      onChange={handleGrow}
+                      type='number'
+                      name='playerGuess'>
+                    </input>
+              
+                    <button type='submit'
+                      id='guess-computer-number-submit'>
+                      SUBMIT GUESS
+                    </button>
+                  </form>
+              </>
+              )}
 
-          <div>
+          <div id='high-or-low-response-container'>
             {computersNumber ? highOrLow() : null}
           </div>
         </div>
@@ -145,5 +174,5 @@ const playAgain = () => {
     </div>
   )
 }
-//TODO so I think I will do the player number game in another file below this one
+
 export default gameTwo
