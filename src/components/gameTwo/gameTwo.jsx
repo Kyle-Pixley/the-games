@@ -22,7 +22,6 @@ const handleGrow = (e) => {
 
 const guessComputerNumber = () => {
   setIsPlaying(true);
-  console.log('guess computer number function activated')
 
   setIsComputerNumberGame(true);
 
@@ -54,35 +53,25 @@ const highOrLow = () => {
   //!==============================
 
   if(playersNumberGuess === ''){
-    console.log('this')
     return null
   } else if(playersNumberGuess > 100){
     return (
       <h3 id='guess-response'>{playersNumberGuess + ' is more than 100. Guess a number lower than 101 and more than 0.'}</h3>
     )
   } else if(playersNumberGuess <= 0) {
-    //todo needs fixing ^^^^
     return ( 
       <h3 id='guess-response'>{playersNumberGuess + ' is less than 1. Guess a number lower than 101 and more than 0.'}</h3>
     )
   } else if(playersNumberGuess > computersNumber){
     return (
-      <h3 id='guess-response'>Lower</h3>
+      <h3 id='guess-response'>My number is lower than {playersNumberGuess}.</h3>
     )
   } else if(playersNumberGuess < computersNumber){
     return (
-      <h3 id='guess-response'>Higher</h3>
+      <h3 id='guess-response'>My number is higher than {playersNumberGuess}</h3>
     )
   } else if(playersNumberGuess === computersNumber){
-    return (
-      <div id='win-container'>
-        <h3 id='win-title'>You Got it!!!</h3>
-        <button id='play-again-button' 
-          onClick={playAgain}>
-          Play Again?
-        </button>
-      </div>
-    )
+    setIsWin(true);
   } else {
     return (
       <h3>I am sorry what? Make sure you are entering a whole number.</h3>
@@ -90,13 +79,17 @@ const highOrLow = () => {
   }
 };
 
-useEffect(() => {
-  console.log(`is win is ${isWin}`)
-  if (playersNumberGuess === computersNumber && playersNumberGuess !== '') {
-    setIsWin(true);
-  }
+// useEffect(() => {
+//   console.log(`is win is ${isWin}`)
+//   if (playersNumberGuess === computersNumber && playersNumberGuess !== '') {
+//     setIsWin(true);
+//   }
   
-}, [playersNumberGuess, computersNumber]);
+// }, [playersNumberGuess, computersNumber]);
+
+// useEffect(() => {
+//   console.log(`isWin is ${isWin} 2`)
+// },[isWin])
 
 const playAgain = () => {
   setIsPlaying(false);
@@ -111,7 +104,7 @@ const playAgain = () => {
       <h1 id='number-guesser-title'>Number Guesser</h1>
       <div id='number-guesser-content'>
 
-      <h4 id='computer-or-player'>
+        <h4 id='computer-or-player'>
         { !isPlaying ?
         (
           <div id='game-choose-container'>
@@ -137,12 +130,24 @@ const playAgain = () => {
 
       {isComputerNumberGame ? (
         <div id='computer-number-game-container'>
-          {isWin ? null :
+          {isWin ? (
+            <div id='win-container'>
+            <h3 id='win-title'>You Got it!!!</h3>
+            <p id='win-computers-number'>My number was {computersNumber}.</p>
+            <button id='play-again-button' 
+              onClick={playAgain}>
+              Play Again?
+            </button>
+            //! only when i click on a specific part of the play again button does it work why??? it seems like it might be a css issue
+          </div>
+          ) :
             (
               <>
+              {playersNumberGuess ? highOrLow() :
                 <h2 id='computer-number-intro-text'>
                   Ok I am thinking of a number between 1 and 100.  Let's see if you can guess what it is.
                 </h2>
+                }
 
                   <form id='guess-computer-number-form' onSubmit={handleFormSubmit}>
 
@@ -163,7 +168,7 @@ const playAgain = () => {
               )}
 
           <div id='high-or-low-response-container'>
-            {computersNumber ? highOrLow() : null}
+            {/* {computersNumber ? highOrLow() : null} */}
           </div>
         </div>
       ) : (
