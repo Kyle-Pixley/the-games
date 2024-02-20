@@ -12,6 +12,14 @@ function playerNumberGuesser({ isPlaying }) {
     const [ isHigherOrLower, setIsHigherOrLower ] = useState(false);
     const [ isNumberCorrect, setIsNumberCorrect ] = useState(false);
     const [ iKnowYourNumber, setIKnowYourNumber ] = useState(false);
+    const [ inputGrowSizeOne, setInputGrowSizeOne ] = useState('');
+
+const inputStyle = {
+    width: `${inputGrowSizeOne.length * 22}px`,
+};
+const handleGrow = (e) => {
+    setInputGrowSizeOne(e.target.value)
+};
 
     const handleFormSubmitBeginningEnd = e => {
         e.preventDefault();
@@ -96,12 +104,30 @@ function playerNumberGuesser({ isPlaying }) {
 
   return (
     <div id='player-number-guesser-container'>
-        <h3>Ok think of a number and give me a range of numbers to guess between.</h3>
+        <h3 id='give-number-range-text'>Ok think of a number and give me a range of numbers to guess between.</h3>
 
         <form id='player-number-guesser-form' onSubmit={handleFormSubmitBeginningEnd}>
-            <input id='beginning-number-text' name='beginningNumber' type='number' required></input>
-            <input id='end-number-text' name='endNumber' type='number' required></input>
+            <div id='form-inputs-container'>
+                <input id='beginning-number-text'
+                    name='beginningNumber' 
+                    type='number' 
+                    onChange={handleGrow}
+                    style={inputStyle}
+                    required>
+                </input>
+
+                <input 
+                    id='end-number-text'
+                    name='endNumber' 
+                    type='number'
+                    onChange={handleGrow}
+                    style={inputStyle}
+                    required>
+                </input>
+            </div>
+
             <button id='player-number-submit-button' type='submit'>Submit</button>
+
         </form>
         {isUserError ? userError() : null}
         {halfBetweenBeginAndEnd ? (<h3>Is your number {halfBetweenBeginAndEnd}?</h3>) : null}

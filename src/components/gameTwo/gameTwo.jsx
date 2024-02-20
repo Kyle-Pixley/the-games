@@ -9,8 +9,8 @@ const [ isComputerNumberGame, setIsComputerNumberGame ] = useState(false);
 const [ isPlayerNumberGame, setIsPlayerNumberGame ] = useState(false);
 const [ computersNumber, setComputersNumber ] = useState('');
 const [ playersNumberGuess, setPlayersNumberGuess ] = useState('');
-const [ inputGrowSize, setInputGrowSize ] = useState('');
 const [ isWin, setIsWin ] = useState(false);
+const [ inputGrowSize, setInputGrowSize ] = useState('');
 
 const inputStyle = {
   width: `${inputGrowSize.length * 22}px`,
@@ -138,7 +138,6 @@ const playAgain = () => {
               onClick={playAgain}>
               Play Again?
             </button>
-            //! only when i click on a specific part of the play again button does it work why??? it seems like it might be a css issue
           </div>
           ) :
             (
