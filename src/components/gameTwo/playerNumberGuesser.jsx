@@ -13,19 +13,32 @@ function playerNumberGuesser({ isPlaying }) {
     const [ isNumberCorrect, setIsNumberCorrect ] = useState(false);
     const [ iKnowYourNumber, setIKnowYourNumber ] = useState(false);
     const [ inputGrowSizeOne, setInputGrowSizeOne ] = useState('');
+    const [ inputGrowSizeTwo, setInputGrowSizeTwo ] = useState('');
+    const [ isComputerGuessing, setIsComputerGuessing ] = useState(false);
 
-const inputStyle = {
-    width: `${inputGrowSizeOne.length * 22}px`,
-};
-const handleGrow = (e) => {
+    const getInputStyle = (inputGrowSize) => {
+        return {
+            width: `${inputGrowSize.length * 20}px`,
+        };
+    }
+    
+    const inputStyleOne = getInputStyle(inputGrowSizeOne);
+    const inputStyleTwo = getInputStyle(inputGrowSizeTwo);
+    
+
+const handleGrowOne = (e) => {
     setInputGrowSizeOne(e.target.value)
+};
+const handleGrowTwo = (e) => {
+    setInputGrowSizeTwo(e.target.value)
 };
 
     const handleFormSubmitBeginningEnd = e => {
         e.preventDefault();
-        console.log("Form submit number 2 hit")
+        console.log(';alksdjf;alkjsdf;alkjdsf;akldfj;akjdsf;akljds')
         setBeginningNumberRange(Number(e.target.beginningNumber.value));
         setEndNumberRange(Number(e.target.endNumber.value));
+        setIsComputerGuessing(true);
     };
     
     const getComputersGuess = () => {
@@ -53,20 +66,18 @@ const handleGrow = (e) => {
     const computerKnowsYourNumber = () => {
         return (
             <div>
-                <h3>I know your number is {halfBetweenBeginAndEnd} so don't lie</h3>
+                <h3>Your number is {halfBetweenBeginAndEnd}!</h3>
             </div>
         )
     }
     const higherOrLower = () => {
         return (
-            <div>
-                <div>
-                    <button onClick={numberIsHigher}>Higher</button>
-                    <button onClick={numberIsLower}>Lower</button>
+            <div id='high-low-correct-buttons-container'>
+                <div id='high-low-button-container'>
+                    <button className='high-low-buttons' onClick={numberIsHigher}>Higher</button>
+                    <button className='high-low-buttons' onClick={numberIsLower}>Lower</button>
                 </div>
-                <div>
-                    <button onClick={ () => setIsNumberCorrect(true)}>Correct</button>
-                </div>
+                    <button id='correct-button' onClick={ () => setIsNumberCorrect(true)}>Correct</button>
             </div>
         )
 
@@ -80,6 +91,7 @@ const handleGrow = (e) => {
     
     const userError = () => {
         console.log('this is for any errors the user makes when selecting numbers')
+        //! This needs to be fixed to account for when the game has started with no error 
         if(beginningNumberRange >= endNumberRange) {
             return (
                 <h3>The end number needs to be greater than the beginning number.</h3>
@@ -104,36 +116,46 @@ const handleGrow = (e) => {
 
   return (
     <div id='player-number-guesser-container'>
-        <h3 id='give-number-range-text'>Ok think of a number and give me a range of numbers to guess between.</h3>
+        {!isComputerGuessing ? (
+            <div>
+                <h3 id='give-number-range-text'>Ok think of a number and give me a range of numbers to guess between.</h3>
 
-        <form id='player-number-guesser-form' onSubmit={handleFormSubmitBeginningEnd}>
-            <div id='form-inputs-container'>
-                <input id='beginning-number-text'
-                    name='beginningNumber' 
-                    type='number' 
-                    onChange={handleGrow}
-                    style={inputStyle}
-                    required>
-                </input>
+                <form id='player-number-guesser-form' onSubmit={handleFormSubmitBeginningEnd}>
+                    <div id='form-inputs-container'>
+                        <input 
+                            id='beginning-number-text'
+                            name='beginningNumber' 
+                            type='number' 
+                            onChange={handleGrowOne}
+                            style={inputStyleOne}
+                            required>
+                        </input>
 
-                <input 
-                    id='end-number-text'
-                    name='endNumber' 
-                    type='number'
-                    onChange={handleGrow}
-                    style={inputStyle}
-                    required>
-                </input>
+                        <input 
+                            id='end-number-text'
+                            name='endNumber' 
+                            type='number'
+                            onChange={handleGrowTwo}
+                            style={inputStyleTwo}
+                            required>
+                        </input>
+                </div>
+
+                    <button id='player-number-submit-button' type='submit'>Submit</button>
+
+                </form>
             </div>
+        ) : null}
 
-            <button id='player-number-submit-button' type='submit'>Submit</button>
-
-        </form>
         {isUserError ? userError() : null}
-        {halfBetweenBeginAndEnd ? (<h3>Is your number {halfBetweenBeginAndEnd}?</h3>) : null}
-        {isHigherOrLower ? higherOrLower() : null}
-        {iKnowYourNumber ? computerKnowsYourNumber() : null}
-        {isNumberCorrect ? numberIsCorrect() : null}
+        <div id='guess-player-number-game-container'>
+            {halfBetweenBeginAndEnd ? (
+                <h3 id='is-your-number'>Is your number {halfBetweenBeginAndEnd}?</h3>
+                ) : null}
+            {isHigherOrLower ? higherOrLower() : null}
+            {iKnowYourNumber ? computerKnowsYourNumber() : null}
+            {isNumberCorrect ? numberIsCorrect() : null}
+        </div>
 
     </div>
   )

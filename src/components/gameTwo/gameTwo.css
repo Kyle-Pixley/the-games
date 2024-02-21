@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
     width: 85%;
     background-color: #ffb5b5;
 }
@@ -71,7 +72,6 @@
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 2em;
     margin-bottom: -4vh;
-    kerning: auto;
 }
 #high-or-low-response-container {
     justify-content: center;

@@ -4,7 +4,7 @@
     width: 100%;
 }
 #nav-bar {
-    padding: 0.5em 0;
+    padding: 0 0.5em;
     width: 15vw;
     border-right: 3px solid seagreen;
     height: 100%;
