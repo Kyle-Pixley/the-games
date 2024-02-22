@@ -173,7 +173,9 @@ const playAgain = () => {
       ) : (
         null
         )}
-      {isPlayerNumberGame ? <PlayerNumberGuesser isPlaying={isPlaying} /> : null }
+      {isPlayerNumberGame ? 
+      <PlayerNumberGuesser isPlaying={isPlaying} setIsPlaying={setIsPlaying} isPlayerNumberGame={isPlayerNumberGame} setIsPlayerNumberGame={setIsPlayerNumberGame} 
+      /> : null }
         </div>
     </div>
   )

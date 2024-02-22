@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './playerNumberGuesser.css'
 
-function playerNumberGuesser({ isPlaying }) {
+function playerNumberGuesser({ isPlayerNumberGame, setIsPlayerNumberGame, isPlaying, setIsPlaying }) {
 
     const [ beginningNumberRange, setBeginningNumberRange ] = useState('');
     const [ endNumberRange, setEndNumberRange ] = useState('');
@@ -27,6 +27,8 @@ function playerNumberGuesser({ isPlaying }) {
         setIsNumberCorrect(false);
         setIKnowYourNumber(false);
         setIsComputerGuessing(false);
+        setIsPlayerNumberGame(false);
+        setIsPlaying(false);
     }
 
     const getInputStyle = (inputGrowSize) => {
@@ -48,7 +50,7 @@ const handleGrowTwo = (e) => {
 
     const handleFormSubmitBeginningEnd = e => {
         e.preventDefault();
-        console.log(';alksdjf;alkjsdf;alkjdsf;akldfj;akjdsf;akljds')
+        console.log(';alksdjf;')
         setBeginningNumberRange(Number(e.target.beginningNumber.value));
         setEndNumberRange(Number(e.target.endNumber.value));
         setIsComputerGuessing(true);
@@ -86,6 +88,7 @@ const handleGrowTwo = (e) => {
             </div>
         )
     }
+
     const higherOrLower = () => {
         console.log('higher or lower is hit')
         return (
@@ -108,13 +111,28 @@ const handleGrowTwo = (e) => {
             setIsHigherOrLower(true);
         }
     },[halfBetweenBeginAndEnd])
+
+    const backToGuessPlayerNumber = () => {
+        setBeginningNumberRange('');
+        setEndNumberRange('');
+        setHalfBetweenBeginAndEnd('');
+        setNumberOfGuesses(0);
+        setIsUserError(false);
+        setIsHigherOrLower(false);
+        setIsNumberCorrect(false);
+        setIKnowYourNumber(false);
+        setIsComputerGuessing(false);
+    }
     
     const userError = () => {
         console.log('this is for any errors the user makes when selecting numbers')
-        //! This needs to be fixed to account for when the game has started with no error 
         if(beginningNumberRange >= endNumberRange) {
             return (
-                <h3>The end number needs to be greater than the beginning number.</h3>
+                <div>
+                    <h3>The end number needs to be greater than the beginning number.</h3>
+                    <button onClick={backToGuessPlayerNumber}>BACK</button>
+                    {/* todo need to make this button go back to guess player number not all the way back to Number guesser main page via playAgain  */}
+                </div>
                 )
             }
         };
@@ -122,6 +140,7 @@ const handleGrowTwo = (e) => {
         useEffect(() => {
 
             if(beginningNumberRange === '' && endNumberRange === ''){
+                
             } else if(beginningNumberRange >= endNumberRange){
                 userError();
                 setIsUserError(true);
@@ -140,7 +159,7 @@ const handleGrowTwo = (e) => {
             console.log('two')
             return numberIsCorrect();
         } else if (iKnowYourNumber) {
-            console.log('three')
+            console.log('three') 
             return computerKnowsYourNumber(); 
         } else if (isHigherOrLower) {
             console.log('four')
