@@ -15,6 +15,19 @@ function playerNumberGuesser({ isPlaying }) {
     const [ inputGrowSizeOne, setInputGrowSizeOne ] = useState('');
     const [ inputGrowSizeTwo, setInputGrowSizeTwo ] = useState('');
     const [ isComputerGuessing, setIsComputerGuessing ] = useState(false);
+    const [ isComputerCorrect, setIsComputerCorrect ] = useState(false);
+    
+    const playAgain = () => {
+        setBeginningNumberRange('');
+        setEndNumberRange('');
+        setHalfBetweenBeginAndEnd('');
+        setNumberOfGuesses(0);
+        setIsUserError(false);
+        setIsHigherOrLower(false);
+        setIsNumberCorrect(false);
+        setIKnowYourNumber(false);
+        setIsComputerGuessing(false);
+    }
 
     const getInputStyle = (inputGrowSize) => {
         return {
@@ -60,19 +73,26 @@ const handleGrowTwo = (e) => {
         setNumberOfGuesses(numberOfGuesses + 1);
     };
     const numberIsCorrect = () => {
-        // todo this triggers when the computer guesses your number correctly 
+        setIsNumberCorrect(true);
+        return computerKnowsYourNumber();
     };
 
     const computerKnowsYourNumber = () => {
+        console.log("computerKnowsYourNumber function hit")
         return (
             <div>
                 <h3>Your number is {halfBetweenBeginAndEnd}!</h3>
+                <button id='play-again-button'onClick={playAgain()}></button>
             </div>
         )
     }
     const higherOrLower = () => {
+        console.log('higher or lower is hit')
         return (
             <div id='high-low-correct-buttons-container'>
+
+                <h3 id='is-your-number'>Is your number {halfBetweenBeginAndEnd}?</h3>
+
                 <div id='high-low-button-container'>
                     <button className='high-low-buttons' onClick={numberIsHigher}>Higher</button>
                     <button className='high-low-buttons' onClick={numberIsLower}>Lower</button>
@@ -110,14 +130,30 @@ const handleGrowTwo = (e) => {
                 setIsUserError(false);
             };
         
-    }, [beginningNumberRange, endNumberRange])
+    }, [beginningNumberRange, endNumberRange]);
+
+    const playingDisplay = () => {
+        if(isUserError) {
+            console.log('One')
+            return userError();
+        } else if (isNumberCorrect) {
+            console.log('two')
+            return numberIsCorrect();
+        } else if (iKnowYourNumber) {
+            console.log('three')
+            return computerKnowsYourNumber(); 
+        } else if (isHigherOrLower) {
+            console.log('four')
+            return higherOrLower();
+        } else null
+    };
 
 
 
   return (
     <div id='player-number-guesser-container'>
         {!isComputerGuessing ? (
-            <div>
+            <div id='input-range-container'>
                 <h3 id='give-number-range-text'>Ok think of a number and give me a range of numbers to guess between.</h3>
 
                 <form id='player-number-guesser-form' onSubmit={handleFormSubmitBeginningEnd}>
@@ -146,16 +182,16 @@ const handleGrowTwo = (e) => {
                 </form>
             </div>
         ) : null}
-
-        {isUserError ? userError() : null}
-        <div id='guess-player-number-game-container'>
+        {playingDisplay()}
+        {/* {isUserError ? userError() : null}
             {halfBetweenBeginAndEnd ? (
+        <div id='guess-player-number-game-container'>
                 <h3 id='is-your-number'>Is your number {halfBetweenBeginAndEnd}?</h3>
-                ) : null}
             {isHigherOrLower ? higherOrLower() : null}
             {iKnowYourNumber ? computerKnowsYourNumber() : null}
             {isNumberCorrect ? numberIsCorrect() : null}
         </div>
+                ) : null} */}
 
     </div>
   )
