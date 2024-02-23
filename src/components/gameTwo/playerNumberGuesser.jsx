@@ -58,7 +58,7 @@ const handleGrowTwo = (e) => {
     
     const getComputersGuess = () => {
         setHalfBetweenBeginAndEnd(Math.floor(Number((beginningNumberRange + endNumberRange) / 2)))
-        console.log(numberOfGuesses)
+
         if(beginningNumberRange +2 === endNumberRange){
             setIKnowYourNumber(true);
         }
@@ -81,10 +81,14 @@ const handleGrowTwo = (e) => {
 
     const computerKnowsYourNumber = () => {
         console.log("computerKnowsYourNumber function hit")
+        console.log(`${isUserError} is user error`)
+        console.log(`${isNumberCorrect} isNumberCorrect`)
+        console.log(`${iKnowYourNumber} iKnowYourNumber`)
+        console.log(`${isHigherOrLower} isHigherOrLower`)
         return (
-            <div>
+            <div id='computer-knows-your-number-container'>
                 <h3>Your number is {halfBetweenBeginAndEnd}!</h3>
-                <button id='play-again-button'onClick={playAgain()}></button>
+                <button id='play-again-button'onClick={() => playAgain()}>Play Again?</button>
             </div>
         )
     }
@@ -125,13 +129,11 @@ const handleGrowTwo = (e) => {
     }
     
     const userError = () => {
-        console.log('this is for any errors the user makes when selecting numbers')
         if(beginningNumberRange >= endNumberRange) {
             return (
                 <div>
                     <h3>The end number needs to be greater than the beginning number.</h3>
-                    <button onClick={backToGuessPlayerNumber}>BACK</button>
-                    {/* todo need to make this button go back to guess player number not all the way back to Number guesser main page via playAgain  */}
+                    <button onClick={() => backToGuessPlayerNumber()}>BACK</button>
                 </div>
                 )
             }
@@ -159,8 +161,8 @@ const handleGrowTwo = (e) => {
             console.log('two')
             return numberIsCorrect();
         } else if (iKnowYourNumber) {
-            console.log('three') 
-            return computerKnowsYourNumber(); 
+            console.log('three computerKnowsYourNumber') 
+            return computerKnowsYourNumber();
         } else if (isHigherOrLower) {
             console.log('four')
             return higherOrLower();
