@@ -1,0 +1,23 @@
+#blackjack-container {
+    background-color: lightgreen;
+    height: 100%;
+    width: 100%;
+    border: 1px solid red;
+}
+#buttons-for-game {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20vh;
+    border-top: 1px solid black;
+
+}
+
+@keyframes flip-2 {
+    0% {
+            transform: scale(0.0);
+    }
+    100% {
+            transform: scale(1);
+    }
+}

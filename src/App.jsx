@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import './App.css'
-import Home from './components/home/Home';
+import Home from './components/blackjack/Blackjack';
 import GameOne from './components/gameOne/gameOne';
 import GameTwo from './components/gameTwo/gameTwo'
 

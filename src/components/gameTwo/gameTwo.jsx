@@ -29,12 +29,6 @@ const guessComputerNumber = () => {
   setComputersNumber(newComputerNumber);
 };
 
-useEffect(() => {
-  if(playersNumberGuess !== ''){
-    console.log(playersNumberGuess)
-    
-  } else null
-}, [playersNumberGuess])
 
 const guessPlayerNumber = () => {
   setIsPlaying(true);
@@ -43,14 +37,10 @@ const guessPlayerNumber = () => {
 
 const handleFormSubmit = e => {
   e.preventDefault();
-  console.log("Form submit button hit");
   setPlayersNumberGuess(Number(e.target.playerGuess.value))
 }
 
 const highOrLow = () => {
-  //! don't forget to take this out
-  console.log(computersNumber)
-  //!==============================
 
   if(playersNumberGuess === ''){
     return null
@@ -78,18 +68,6 @@ const highOrLow = () => {
     )
   }
 };
-
-// useEffect(() => {
-//   console.log(`is win is ${isWin}`)
-//   if (playersNumberGuess === computersNumber && playersNumberGuess !== '') {
-//     setIsWin(true);
-//   }
-  
-// }, [playersNumberGuess, computersNumber]);
-
-// useEffect(() => {
-//   console.log(`isWin is ${isWin} 2`)
-// },[isWin])
 
 const playAgain = () => {
   setIsPlaying(false);

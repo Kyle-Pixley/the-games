@@ -16,16 +16,12 @@ function gameOne() {
 
   const handleClick = ( row, column ) => {
     setTie(tie + 1);
-    console.log(tie)
     if (board[row][column] === '' && !winner) {
       const newBoard = [...board];
       newBoard[row][column] = currentPlayer;
       setBoard(newBoard);
       setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
-      if(currentPlayer === 'X') {
-        console.log('the player is o')
-      }
-    
+
       if (isWinner()) {
         setWinner(currentPlayer + " Wins!");
       }
@@ -57,7 +53,6 @@ function gameOne() {
   }
 
   const restartGame = () => {
-    console.log("This is where the game restarts")
     setBoard(initialBoard)
     setWinner(null)
     setTie(0)

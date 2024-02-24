@@ -6,6 +6,7 @@ function playerNumberGuesser({ isPlayerNumberGame, setIsPlayerNumberGame, isPlay
     const [ beginningNumberRange, setBeginningNumberRange ] = useState('');
     const [ endNumberRange, setEndNumberRange ] = useState('');
     const [ computerGuessNumber, setComputerGuessNumber ] = useState('');
+    //todo delete this ^^^^
     const [ halfBetweenBeginAndEnd, setHalfBetweenBeginAndEnd ] = useState('');
     const [ numberOfGuesses, setNumberOfGuesses ] = useState(0);
     const [ isUserError, setIsUserError ] = useState(false);
@@ -16,7 +17,9 @@ function playerNumberGuesser({ isPlayerNumberGame, setIsPlayerNumberGame, isPlay
     const [ inputGrowSizeTwo, setInputGrowSizeTwo ] = useState('');
     const [ isComputerGuessing, setIsComputerGuessing ] = useState(false);
     const [ isComputerCorrect, setIsComputerCorrect ] = useState(false);
+    //todo and this ^^^^
     
+    // sets all useStates to default to start game over
     const playAgain = () => {
         setBeginningNumberRange('');
         setEndNumberRange('');
@@ -31,6 +34,7 @@ function playerNumberGuesser({ isPlayerNumberGame, setIsPlayerNumberGame, isPlay
         setIsPlaying(false);
     }
 
+    // gets width of the inputs based on the length of the value
     const getInputStyle = (inputGrowSize) => {
         return {
             width: `${inputGrowSize.length * 20}px`,
@@ -40,7 +44,8 @@ function playerNumberGuesser({ isPlayerNumberGame, setIsPlayerNumberGame, isPlay
     const inputStyleOne = getInputStyle(inputGrowSizeOne);
     const inputStyleTwo = getInputStyle(inputGrowSizeTwo);
     
-
+// sets each input seperately 
+//todo can probably make these into one function
 const handleGrowOne = (e) => {
     setInputGrowSizeOne(e.target.value)
 };
@@ -48,6 +53,7 @@ const handleGrowTwo = (e) => {
     setInputGrowSizeTwo(e.target.value)
 };
 
+// sets the range of numbers for the computer to guess within
     const handleFormSubmitBeginningEnd = e => {
         e.preventDefault();
         console.log(';alksdjf;')
@@ -75,16 +81,10 @@ const handleGrowTwo = (e) => {
         setNumberOfGuesses(numberOfGuesses + 1);
     };
     const numberIsCorrect = () => {
-        setIsNumberCorrect(true);
         return computerKnowsYourNumber();
     };
 
     const computerKnowsYourNumber = () => {
-        console.log("computerKnowsYourNumber function hit")
-        console.log(`${isUserError} is user error`)
-        console.log(`${isNumberCorrect} isNumberCorrect`)
-        console.log(`${iKnowYourNumber} iKnowYourNumber`)
-        console.log(`${isHigherOrLower} isHigherOrLower`)
         return (
             <div id='computer-knows-your-number-container'>
                 <h3>Your number is {halfBetweenBeginAndEnd}!</h3>
@@ -97,7 +97,7 @@ const handleGrowTwo = (e) => {
         console.log('higher or lower is hit')
         return (
             <div id='high-low-correct-buttons-container'>
-
+j
                 <h3 id='is-your-number'>Is your number {halfBetweenBeginAndEnd}?</h3>
 
                 <div id='high-low-button-container'>
@@ -133,7 +133,7 @@ const handleGrowTwo = (e) => {
             return (
                 <div>
                     <h3>The end number needs to be greater than the beginning number.</h3>
-                    <button onClick={() => backToGuessPlayerNumber()}>BACK</button>
+                    <button id='back-to-inputs-button' onClick={() => backToGuessPlayerNumber()}>BACK</button>
                 </div>
                 )
             }
@@ -142,7 +142,9 @@ const handleGrowTwo = (e) => {
         useEffect(() => {
 
             if(beginningNumberRange === '' && endNumberRange === ''){
-                
+            
+            } else if (isComputerGuessing && beginningNumberRange>= endNumberRange) {
+                setIKnowYourNumber(true);
             } else if(beginningNumberRange >= endNumberRange){
                 userError();
                 setIsUserError(true);
@@ -168,8 +170,6 @@ const handleGrowTwo = (e) => {
             return higherOrLower();
         } else null
     };
-
-
 
   return (
     <div id='player-number-guesser-container'>
@@ -204,16 +204,6 @@ const handleGrowTwo = (e) => {
             </div>
         ) : null}
         {playingDisplay()}
-        {/* {isUserError ? userError() : null}
-            {halfBetweenBeginAndEnd ? (
-        <div id='guess-player-number-game-container'>
-                <h3 id='is-your-number'>Is your number {halfBetweenBeginAndEnd}?</h3>
-            {isHigherOrLower ? higherOrLower() : null}
-            {iKnowYourNumber ? computerKnowsYourNumber() : null}
-            {isNumberCorrect ? numberIsCorrect() : null}
-        </div>
-                ) : null} */}
-
     </div>
   )
 }
