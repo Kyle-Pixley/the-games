@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import PlayersHand from './playersHand/PlayersHand';
+import DealersHand from './DealersHand/DealersHand';
 import './Blackjack.css'
 
 function Blackjack() {
 
     const [ deck, setDeck ] = useState('');
-    const [ playersHand, setPlayersHand ] = useState({});
+    const [ playersHand, setPlayersHand ] = useState('');
     const [ dealersHand, setDealersHand ] = useState([]);
 
     const fetchDeck = () => {
@@ -22,13 +23,6 @@ function Blackjack() {
             drawTwoCards();
         }
     },[deck])
-
-    useEffect(() => {
-        if(Object.keys(playersHand).length !== 0) {
-            console.log(playersHand)
-        }
-    },[playersHand])
-    //! test ^^^^
 
     const drawTwoCards = () => {
         const deckId = deck.deck_id
@@ -55,25 +49,21 @@ function Blackjack() {
                 </button>
             )
         }
-    }
-
-    const figureOutThePath = () => {
-        console.log(playersHand.twoCards.cards.map(e => e.code))
-    }
-    //! testing ^^^^
+    };
 
 
     return (
         <div id='blackjack-container'>
 
-            <PlayersHand playersHand={playersHand} />
+            <DealersHand dealersHand={dealersHand} />
+
+            <PlayersHand playersHand={playersHand} className='players-hand' />
 
             <div id='buttons-for-game'>
-                <button onClick={figureOutThePath}>BUTTON</button>
                 {deck ? null 
                     : (
                     <button onClick={() => fetchDeck()}>Play</button>
-                    ) }
+                    )}
                 {hitMoreCardsButton()}
             </div>
         </div>
