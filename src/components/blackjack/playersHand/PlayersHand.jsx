@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import './PlayersHand.css'
 
-function PlayersHand({ playersHand }) {
+function PlayersHand({ playersHand, playerScore, setPlayerScore, playerPoints, setPlayerPoints, playerBust, setPlayerBust, setPot }) {
 
     const displayPlayersHand = () => {
         if(Object.keys(playersHand).length !== 0){
@@ -12,13 +12,38 @@ function PlayersHand({ playersHand }) {
         }
     };
     const displayPlayersScore = () => {
+        console.log(playersHand.twoCards)
         const totalValue = playersHand.twoCards.cards.reduce((acc, card) => {
-            const numericValue = parseFloat(card.value);
-                return isNaN(numericValue) ? acc : acc + numericValue;
-            }, 0);
-        return totalValue;
-    }
-    //todo if the card is a face card the value is a string of what that face card is "JACK" "KING"... so handle those cases monday
+            let numericValue;
+            if (card.value === "JACK" || card.value === "QUEEN" || card.value === "KING") {
+                numericValue = 10;
+            } else  if(card.value === "ACE") {
+                numericValue = 1;
+                if(acc + 11 <= 21) {
+                    numericValue = 11;
+                } 
+            } else {
+                numericValue = parseFloat(card.value);
+                numericValue = isNaN(numericValue) ? 0 : numericValue;
+            }
+            return acc + numericValue;
+        }, 0);
+        setPlayerScore(totalValue);
+    };
+
+    useEffect(() => {
+        if(playersHand != ''){
+            displayPlayersScore();
+            console.log(playersHand)
+        }
+    }, [playersHand]);
+    useEffect(() => {
+        if(playerScore > 21) {
+            setPlayerBust(true);
+            setPot(0);
+        }
+    }, [playerScore])
+
 
   return (
     <div id='players-hand-container'>
@@ -29,10 +54,14 @@ function PlayersHand({ playersHand }) {
                         {displayPlayersHand()}
                     </div>
                     <div>
-                        {displayPlayersScore()}
+                        <h2>{playerScore}</h2>
                     </div>
                 </div>
-            ) : <h1 id='title-banner'>PlayersHand</h1>}
+            ) : (
+            <div>
+                <h1 id='title-banner'>PlayersHand</h1>
+            </div>
+            )}
         <div id='players-score'>
         </div>
     </div>

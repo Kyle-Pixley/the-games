@@ -14,13 +14,20 @@
     position: relative;
     bottom: 0;
     width: 18vh;
-    bottom: 0;
 }
 #players-card-number-0{
-    animation: slide-in .2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-in .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    transform: rotate(45deg);
+    /* todo need to figure out how to rotate images this ^^ is not working would like images to be in a fan like you are holding them */
 }
 #players-card-number-1{
-    animation: slide-in .4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-in .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+#players-card-number-2{
+    animation: slide-in .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+#players-card-number-3{
+    animation: slide-in .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @keyframes slide-in {
