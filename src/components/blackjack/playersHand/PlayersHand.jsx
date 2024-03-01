@@ -6,13 +6,25 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, playerPoints, s
     const displayPlayersHand = () => {
         if(Object.keys(playersHand).length !== 0){
             const cardImages = playersHand.twoCards.cards.map((card, i) => (
-                <img className='players-card-images' id={`players-card-number-${i}`} key={i} src={card.image} alt={`Card ${i + 1}`}/>
+                <img className='players-card-images' id={cardRotation(i)} key={i} src={card.image} alt={`Card ${i + 1}`}/>
             ));
             return cardImages;
         }
     };
+
+    const cardRotation = (i) => {
+        if(playersHand.twoCards.cards.length === 2){
+            return `players-card-number-${i}`
+        } else if(playersHand.twoCards.cards.length === 3) {
+            return `players-card-number-${i}-1`
+        } else if(playersHand.twoCards.cards.length === 4) {
+            return `players-card-number-${i}-2`
+        }
+    };
+
+    // it will be possible however super unlikely to hold 11 cards 
+
     const displayPlayersScore = () => {
-        console.log(playersHand.twoCards)
         const totalValue = playersHand.twoCards.cards.reduce((acc, card) => {
             let numericValue;
             if (card.value === "JACK" || card.value === "QUEEN" || card.value === "KING") {
@@ -34,7 +46,6 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, playerPoints, s
     useEffect(() => {
         if(playersHand != ''){
             displayPlayersScore();
-            console.log(playersHand)
         }
     }, [playersHand]);
     useEffect(() => {
@@ -50,7 +61,7 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, playerPoints, s
 
         {playersHand ? (
                 <div id='players-spot-container'>
-                    <div>
+                    <div id='card-image-container'>
                         {displayPlayersHand()}
                     </div>
                     <div>

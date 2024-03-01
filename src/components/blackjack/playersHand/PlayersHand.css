@@ -16,25 +16,98 @@
     width: 18vh;
 }
 #players-card-number-0{
-    animation: slide-in .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    transform: rotate(45deg);
-    /* todo need to figure out how to rotate images this ^^ is not working would like images to be in a fan like you are holding them */
+    animation: slide-rotate-15 .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 #players-card-number-1{
-    animation: slide-in .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-#players-card-number-2{
-    animation: slide-in .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-#players-card-number-3{
-    animation: slide-in .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-rotate15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-left: -2em;
 }
 
-@keyframes slide-in {
+#players-card-number-0-1{
+    animation: slide-rotate-25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-right: -3em;
+}
+#players-card-number-1-1{
+    animation: slide .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-bottom: 1em;
+}
+#players-card-number-2-1{
+    animation: slide-rotate25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-left: -3em;
+}
+
+#players-card-number-0-2{
+    animation: slide-rotate-25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-right: -6em;
+}
+#players-card-number-1-2{
+    animation: slide-rotate-15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-bottom: 1em;
+    margin-right: -3em;
+}
+#players-card-number-2-2{
+    animation: slide-rotate15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-bottom: 1em;
+    margin-left: -3em;
+}
+#players-card-number-3-2{
+    animation: slide-rotate25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-left: -6em;
+}
+
+@keyframes slide-rotate-15 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    50% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(-15deg);
+    }
+}
+@keyframes slide {
     0% {
         transform: translateX(100vw);
+    }
+    50% {
+        transform: translateX(0);
     }
     100% {
         transform: translateX(0);
     }
 }
+@keyframes slide-rotate15 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    50% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(15deg);
+    }
+}
+@keyframes slide-rotate25 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    50% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(25deg);
+    }
+}
+@keyframes slide-rotate-25 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    50% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(-25deg);
+    }
+}
+

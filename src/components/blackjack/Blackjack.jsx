@@ -15,7 +15,8 @@ function Blackjack() {
     const [ playersHand, setPlayersHand ] = useState('');
     const [ playerScore, setPlayerScore ] = useState(0);
     const [ playerPoints, setPlayerPoints ] = useState(500);
-    const [ dealersHand, setDealersHand ] = useState([]);
+    const [ dealersHand, setDealersHand ] = useState('');
+    const [ dealersScore, setDealersScore ] = useState(0);
     const [ deckId, setDeckId ] = useState('');
     const [ pot, setPot ] = useState(0);
     const [ playerBust, setPlayerBust ] = useState(false);
@@ -25,6 +26,7 @@ function Blackjack() {
             .then(res => res.json())
             .then(deck => {
                 setDeck(deck)
+                setDeckId(deck.deck_id)
             })
             .catch(err => console.log(err))
     };
@@ -34,20 +36,27 @@ function Blackjack() {
             drawTwoCards();
         }
     },[deck])
-
+    
     const drawTwoCards = () => {
-        const deckId = deck.deck_id
-        setDeckId(deck.deck_id)
+        // setDeckId(deck.deck_id)
+        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
+        .then(res => res.json())
+        .then(twoCards => {
+            setPlayersHand({twoCards})
+            computerDrawTwoCards();
+            })
+            .catch(err => console.log(err))
+    };
+    const computerDrawTwoCards = () => {
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
             .then(res => res.json())
-            .then(twoCards => {
-                setPlayersHand({twoCards})
+            .then(dealersTwoCards => {
+                setDealersHand({dealersTwoCards})
             })
             .catch(err => console.log(err))
     };
 
     const addCardToPlayer = () => {
-        console.log('Add Card To Player ((((No functionality!!))))')
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
             .then(res => res.json())
             .then(hitCard => {
@@ -107,7 +116,10 @@ function Blackjack() {
             : (
                 <div>
                 
-                <DealersHand dealersHand={dealersHand} />
+                <DealersHand 
+                dealersHand={dealersHand}
+                dealersScore={dealersScore}
+                setDealersScore={setDealersScore} />
 
             <Pot pot={pot} setPot={setPot}/>
 
