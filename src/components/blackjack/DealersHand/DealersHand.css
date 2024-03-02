@@ -17,10 +17,22 @@
 #dealers-card-number-0{
     animation: slide-rotate-15 .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-#dealers-card-number-1{
+#dealers-card-front-back-container {
+    position: relative;
+    perspective: 1000px;
+}
+#dealers-card-number-1, #dealers-card-number-1-back{
     animation: slide-rotate15 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     margin-left: -2em;
+    
 }
+#dealers-card-number-1 {
+    
+}
+#dealer-card-number-1-back {
+    
+}
+
 
 #dealers-card-number-0-1{
     animation: slide-rotate-25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -53,6 +65,7 @@
     animation: slide-rotate25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     margin-left: -6em;
 }
+
 
 @keyframes slide-rotate-15 {
     0% {

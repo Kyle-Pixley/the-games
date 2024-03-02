@@ -8,7 +8,7 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore }) {
             const cardImages = dealersHand.dealersTwoCards.cards.map((card, i) => (
                 //! --------------
                 i === 1 ? 
-                    <img className='dealers-card-images' id={dealersCardRotation(i)} key={i} src={card.image} alt={`Card ${i + 1}`} style={hiddenCardStyle}/>
+                    hiddenCard(card, i)
                     :
                     <img className='dealers-card-images' id={dealersCardRotation(i)} key={i} src={card.image} alt={`Card ${i + 1}`}/>
                 //todo think i will need to create a seperate function for this? ^^ the second card will need two images one for the back and one for the front 
@@ -17,9 +17,14 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore }) {
         }
     };
 
-    const hiddenCardStyle = {
-        
-    }
+    const hiddenCard = (card, i) => {
+        return (
+            <div id='dealers-card-front-back-container'>
+                <img className='dealers-card-images' id='dealers-card-number-1' key={i} src={card.image} alt={`Card ${i + 1}`}/>
+                <img className='dealers-card-images' id='dealers-card-number-1-back' key={i} src='https://deckofcardsapi.com/static/img/back.png' alt={`Back of Card ${i + 1}`}/>
+            </div>
+            )
+        }
 
     const dealersCardRotation = (i) => {
         if(dealersHand.dealersTwoCards.cards.length === 2){
