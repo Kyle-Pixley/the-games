@@ -6,11 +6,20 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore }) {
     const displayDealersHand = () => {
         if(Object.keys(dealersHand).length !== 0){
             const cardImages = dealersHand.dealersTwoCards.cards.map((card, i) => (
-                <img className='dealers-card-images' id={dealersCardRotation(i)} key={i} src={card.image} alt={`Card ${i + 1}`}/>
+                //! --------------
+                i === 1 ? 
+                    <img className='dealers-card-images' id={dealersCardRotation(i)} key={i} src={card.image} alt={`Card ${i + 1}`} style={hiddenCardStyle}/>
+                    :
+                    <img className='dealers-card-images' id={dealersCardRotation(i)} key={i} src={card.image} alt={`Card ${i + 1}`}/>
+                //todo think i will need to create a seperate function for this? ^^ the second card will need two images one for the back and one for the front 
             ));
             return cardImages;
         }
     };
+
+    const hiddenCardStyle = {
+        
+    }
 
     const dealersCardRotation = (i) => {
         if(dealersHand.dealersTwoCards.cards.length === 2){
@@ -21,6 +30,7 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore }) {
             return `dealers-card-number-${i}-2`
         }
     };
+
 
     const displayDealersScore = () => {
         const totalValue = dealersHand.dealersTwoCards.cards.reduce((acc, card) => {

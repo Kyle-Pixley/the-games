@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './PlayersHand.css'
 
-function PlayersHand({ playersHand, playerScore, setPlayerScore, playerPoints, setPlayerPoints, playerBust, setPlayerBust, setPot }) {
+function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, setPot }) {
 
     const displayPlayersHand = () => {
         if(Object.keys(playersHand).length !== 0){
