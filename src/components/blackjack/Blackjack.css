@@ -1,0 +1,90 @@
+#blackjack-container {
+    background-color: lightgreen;
+    height: 100vh;
+    width: 100%;
+}
+#buttons-for-game {
+    width: 100%;
+    height: 20vh;
+    border-top: 1px solid black;
+    position: relative;
+}
+#pre-game-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+#draw-cards-button {
+    height: 1em;
+    padding:1em 2.5em;
+    margin: auto;
+    font-size: 2.5vh;
+    padding-bottom: 2.5em;
+}
+#bet-container {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#bet-button-container {
+    margin-top: .2em;
+}
+.bet-buttons {
+    width: 7vw;
+    background: none;
+    border: none;
+    position: relative;
+    text-align: center;
+}
+.bet-buttons:hover{
+    cursor: pointer;
+}
+.bet-images {
+    height: 10vh;
+}
+.bet-text {
+    position: absolute;
+    top: 35.5%;
+    left: 40%;
+    font-size: 120%;
+    font-weight: 600;
+}
+#bet-text-1 {
+
+}
+#bet-text-2 {
+    left: 37%;
+    top: 36%;
+}
+#bet-text-3 {
+    left: 33%;
+}
+#bet-text-4 {
+    left: 35%;
+}
+#bet-text-5 {
+    left: 28%;
+    color: white;
+}
+#player-points {
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+#busted-container {
+    display: flex;
+    flex-direction: column;
+    
+}
+#busted-title {
+    text-align: center;
+}
+
+@keyframes flip-2 {
+    0% {
+            transform: scale(0.0);
+    }
+    100% {
+            transform: scale(1);
+    }
+}

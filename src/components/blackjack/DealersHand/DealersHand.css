@@ -1,0 +1,145 @@
+#dealers-hand-container {
+    height: 40vh;
+    border: 1px solid black;
+}
+#dealers-spot-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+#dealers-card-images-container {
+    margin-top: 3vh;
+}
+.dealers-card-images {
+    position: relative;
+    bottom: 0;
+    width: 18vh;
+}
+#dealers-card-number-0{
+    animation: slide-rotate-15 .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+#dealers-card-front-back-container {
+    display: inline-block;
+    position: relative;
+
+    perspective: 1000px;
+}
+#dealers-card-number-1-back{
+    animation: slide-rotate15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-left: -2em;
+    
+}
+
+#dealer-card-number-1 {
+    animation: rotate15 0s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    /* animation: flip 0.5s cubic-bezier(.455, .03, .515, .955) both; */
+    /* transition: transform 0.5s; */
+}
+
+
+#dealers-card-number-0-1{
+    animation: slide-rotate-25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-right: -3em;
+}
+#dealers-card-number-1-1{
+    animation: slide .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-bottom: 1em;
+}
+#dealers-card-number-2-1{
+    animation: slide-rotate25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-left: -3em;
+}
+
+#dealers-card-number-0-2{
+    animation: slide-rotate-25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-right: -6em;
+}
+#dealers-card-number-1-2{
+    animation: slide-rotate-15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-bottom: 1em;
+    margin-right: -3em;
+}
+#dealers-card-number-2-2{
+    animation: slide-rotate15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-bottom: 1em;
+    margin-left: -3em;
+}
+#dealers-card-number-3-2{
+    animation: slide-rotate25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-left: -6em;
+}
+
+
+@keyframes slide-rotate-15 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    50% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(-15deg);
+    }
+}
+@keyframes slide {
+    0% {
+        transform: translateX(100vw);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes rotate15 {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(15deg);
+    }
+}
+@keyframes slide-rotate15 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    50% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(15deg);
+    }
+}
+@keyframes slide-rotate25 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    50% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(25deg);
+    }
+}
+@keyframes slide-rotate-25 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    50% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(-25deg);
+    }
+}
+  @keyframes flip {
+    0% {
+              transform: translateX(0) rotateY(0);
+              transform-origin: 0% 50%;
+    }
+    100% {
+              transform: translateX(-100%) rotateY(180deg);
+              transform-origin: 100% 0%;
+    }
+  }
+  
