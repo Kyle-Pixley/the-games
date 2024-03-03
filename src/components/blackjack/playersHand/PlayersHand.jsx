@@ -34,6 +34,7 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
                 if(acc + 11 <= 21) {
                     numericValue = 11;
                 } 
+                //todo if card is ace and can be valued at 11 then it will be and will not change to one if player hits
             } else {
                 numericValue = parseFloat(card.value);
                 numericValue = isNaN(numericValue) ? 0 : numericValue;

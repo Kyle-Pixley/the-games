@@ -18,19 +18,21 @@
     animation: slide-rotate-15 .3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 #dealers-card-front-back-container {
+    display: inline-block;
     position: relative;
+
     perspective: 1000px;
 }
-#dealers-card-number-1, #dealers-card-number-1-back{
-    animation: slide-rotate15 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+#dealers-card-number-1-back{
+    animation: slide-rotate15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     margin-left: -2em;
     
 }
-#dealers-card-number-1 {
-    
-}
-#dealer-card-number-1-back {
-    
+
+#dealer-card-number-1 {
+    animation: rotate15 0s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    /* animation: flip 0.5s cubic-bezier(.455, .03, .515, .955) both; */
+    /* transition: transform 0.5s; */
 }
 
 
@@ -89,6 +91,14 @@
         transform: translateX(0);
     }
 }
+@keyframes rotate15 {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(15deg);
+    }
+}
 @keyframes slide-rotate15 {
     0% {
         transform: translateX(100vw) rotate(0);
@@ -122,3 +132,14 @@
         transform: translateX(0) rotate(-25deg);
     }
 }
+  @keyframes flip {
+    0% {
+              transform: translateX(0) rotateY(0);
+              transform-origin: 0% 50%;
+    }
+    100% {
+              transform: translateX(-100%) rotateY(180deg);
+              transform-origin: 100% 0%;
+    }
+  }
+  

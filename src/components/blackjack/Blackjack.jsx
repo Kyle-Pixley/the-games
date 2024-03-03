@@ -20,6 +20,8 @@ function Blackjack() {
     const [ deckId, setDeckId ] = useState('');
     const [ pot, setPot ] = useState(0);
     const [ playerBust, setPlayerBust ] = useState(false);
+    const [ isFlipped, setIsFlipped ] = useState(false);
+
 
     const fetchDeck = () => {
         fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
@@ -119,7 +121,9 @@ function Blackjack() {
                 <DealersHand 
                 dealersHand={dealersHand}
                 dealersScore={dealersScore}
-                setDealersScore={setDealersScore} />
+                setDealersScore={setDealersScore}
+                isFlipped={isFlipped}
+                setIsFlipped={setIsFlipped} />
 
             <Pot pot={pot} setPot={setPot}/>
 
