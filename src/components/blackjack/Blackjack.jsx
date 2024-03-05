@@ -20,6 +20,7 @@ function Blackjack() {
     const [ deckId, setDeckId ] = useState('');
     const [ pot, setPot ] = useState(0);
     const [ playerBust, setPlayerBust ] = useState(false);
+    const [ dealerBust, setDealerBust ] = useState(false);
     const [ isStand, setIsStand ] = useState(false);
     const [ isFlipped, setIsFlipped ] = useState(false);
 
@@ -73,15 +74,47 @@ function Blackjack() {
                 }));
             })
             .catch(err => console.log(err));
+        };
+
+        const playerStands = () => {
+            setIsStand(true);
+        };
+
+        useEffect(() => {
+            console.log(playersHand)
+            if(isStand){
+                if(playerScore > dealersScore && playerScore != 21){
+                    dealerHitStand();
+                //! this logic below will not go here
+                } else if(playerScore === 21 && playersHand.twoCards.cards.length === 2) {
+                    setPlayerPoints(playerPoints + (pot * 2.5))
+                } else if(playerScore) {
+                    console.log('stuff')
+                }
+            }
+        }, [isStand]);
+
+    const dealerHitStand = () => {
+
+            if(dealersScore < 21) {
+                fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
+                .then(res => res.json())
+                .then(dealerHitCard => {
+                    setDealersHand(prevState => ({
+                        ...prevState,
+                        dealersTwoCards: {
+                            ...prevState.dealersTwoCards,
+                            cards: [...prevState.dealersTwoCards.cards, dealerHitCard.cards[0]]
+                        }
+                    }));
+                });
+            } else if (dealersScore > 21) {
+                setDealerBust(true);
+                console.log(dealerBust, ' dealer bust??')
+            }
+        
     };
 
-    const playerStands = () => {
-        setIsStand(true);
-    };
-    useEffect(() => {
-        console.log(isStand)
-    }, [isStand]);
-    
     //add more cards to players hand
     const hitMoreCardsButton = () => {
         if(Object.keys(playersHand).length !== 0) {
@@ -137,7 +170,8 @@ function Blackjack() {
                 dealersScore={dealersScore}
                 setDealersScore={setDealersScore}
                 isFlipped={isFlipped}
-                setIsFlipped={setIsFlipped} />
+                setIsFlipped={setIsFlipped} 
+                setDealerBust={setDealerBust}/>
 
             <Pot pot={pot} setPot={setPot}/>
 
@@ -193,7 +227,7 @@ function Blackjack() {
                                     <p className='bet-text' id='bet-text-5'>$100</p>
                                 </button>
                             </div>
-                            {/* white = 1, blue = 5, red = 10,  green = 50, black = 100*/}
+
                         </div>
                     </div>
                     )}
