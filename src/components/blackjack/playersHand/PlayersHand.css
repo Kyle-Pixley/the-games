@@ -55,6 +55,29 @@
     margin-left: -6em;
 }
 
+#players-card-number-0-3 {
+    animation: slide-rotate-25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-right: -5.5em;
+}
+#players-card-number-1-3 {
+    animation: slide-rotate-15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-right: -5.5em;
+    margin-bottom: 1em;
+}
+#players-card-number-2-3 {
+    animation: slide .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-bottom: 1.5em;
+}
+#players-card-number-3-3 {
+    animation: slide-rotate15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-left: -5.5em;
+    margin-bottom: 1em;
+}
+#players-card-number-4-3 {
+    animation: slide-rotate25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    margin-left: -5.5em;
+}
+
 @keyframes slide-rotate-15 {
     0% {
         transform: translateX(100vw) rotate(0);
@@ -110,4 +133,19 @@
         transform: translateX(0) rotate(-25deg);
     }
 }
-
+@keyframes slide-rotate-35 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(-35deg);
+    }
+}
+@keyframes slide-rotate35 {
+    0% {
+        transform: translateX(100vw) rotate(0);
+    }
+    100% {
+        transform: translateX(0) rotate(35deg);
+    }
+}

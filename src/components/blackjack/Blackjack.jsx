@@ -20,6 +20,7 @@ function Blackjack() {
     const [ deckId, setDeckId ] = useState('');
     const [ pot, setPot ] = useState(0);
     const [ playerBust, setPlayerBust ] = useState(false);
+    const [ isStand, setIsStand ] = useState(false);
     const [ isFlipped, setIsFlipped ] = useState(false);
 
 
@@ -73,16 +74,28 @@ function Blackjack() {
             })
             .catch(err => console.log(err));
     };
+    const playerStands = () => {
+        setIsStand(true);
+    };
+    useEffect(() => {
+        console.log(isStand)
+    }, [isStand]);
     
     //add more cards to players hand
     const hitMoreCardsButton = () => {
         if(Object.keys(playersHand).length !== 0) {
             return (
-                <button 
-                id='hit-button'
-                onClick={() => addCardToPlayer()}>
-                    Hit Me!
-                </button>
+                <div>
+                    <button 
+                    id='hit-button'
+                    onClick={() => addCardToPlayer()}>
+                        Hit Me!
+                    </button>
+                    <button id='stand-button'
+                    onClick={() => playerStands()}>
+                        Stand
+                    </button>
+                </div>
             )
         }
     };

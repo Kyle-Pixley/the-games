@@ -19,30 +19,41 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
             return `players-card-number-${i}-1`
         } else if(playersHand.twoCards.cards.length === 4) {
             return `players-card-number-${i}-2`
+        } else if(playersHand.twoCards.cards.length === 5) {
+            return `players-card-number-${i}-3`
         }
     };
 
     // it will be possible however super unlikely to hold 11 cards 
 
     const displayPlayersScore = () => {
-        const totalValue = playersHand.twoCards.cards.reduce((acc, card) => {
+        let totalValue = 0;
+        let numberOfAces = 0;
+    
+        // Calculate total value and count aces
+        playersHand.twoCards.cards.forEach(card => {
             let numericValue;
             if (card.value === "JACK" || card.value === "QUEEN" || card.value === "KING") {
                 numericValue = 10;
-            } else  if(card.value === "ACE") {
+            } else if (card.value === "ACE") {
                 numericValue = 1;
-                if(acc + 11 <= 21) {
-                    numericValue = 11;
-                } 
-                //todo if card is ace and can be valued at 11 then it will be and will not change to one if player hits
+                numberOfAces++;
             } else {
                 numericValue = parseFloat(card.value);
                 numericValue = isNaN(numericValue) ? 0 : numericValue;
             }
-            return acc + numericValue;
-        }, 0);
+            totalValue += numericValue;
+        });
+    
+        // Adjust total value if needed to avoid busting
+        while (numberOfAces > 0 && totalValue + 10 <= 21) {
+            totalValue += 10;
+            numberOfAces--;
+        }
+    
         setPlayerScore(totalValue);
     };
+    
 
     useEffect(() => {
         if(playersHand != ''){
