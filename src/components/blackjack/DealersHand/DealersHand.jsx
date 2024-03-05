@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import './DealersHand.css'
 
-function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, setIsFlipped }) {
+function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, setIsFlipped, setDealerBust }) {
 
 
     const displayDealersHand = () => {
         if(Object.keys(dealersHand).length !== 0){
             const cardImages = dealersHand.dealersTwoCards.cards.map((card, i) => (
-                //! --------------
                 i === 1 ? 
                     hiddenCard(card, i)
                     :
@@ -64,9 +63,13 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, se
         }, 0);
         setDealersScore(totalValue);
     };
+
     useEffect(() => {
         if(dealersHand != ''){
             displayDealersScore();
+            if(dealersScore > 21) {
+                setDealerBust(true);
+            }
         }
     }, [dealersHand])
 
