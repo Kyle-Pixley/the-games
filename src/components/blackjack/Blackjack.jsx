@@ -74,6 +74,7 @@ function Blackjack() {
             })
             .catch(err => console.log(err));
     };
+
     const playerStands = () => {
         setIsStand(true);
     };

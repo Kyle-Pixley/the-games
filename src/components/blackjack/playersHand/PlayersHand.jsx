@@ -21,6 +21,7 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
             return `players-card-number-${i}-2`
         } else if(playersHand.twoCards.cards.length === 5) {
             return `players-card-number-${i}-3`
+
         }
     };
 
