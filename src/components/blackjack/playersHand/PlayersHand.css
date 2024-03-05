@@ -133,6 +133,7 @@
         transform: translateX(0) rotate(-25deg);
     }
 }
+
 @keyframes slide-rotate-35 {
     0% {
         transform: translateX(100vw) rotate(0);

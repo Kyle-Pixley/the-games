@@ -227,6 +227,7 @@ function Blackjack() {
                                     <p className='bet-text' id='bet-text-5'>$100</p>
                                 </button>
                             </div>
+
                         </div>
                     </div>
                     )}

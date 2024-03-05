@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import './DealersHand.css'
 
+
 function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, setIsFlipped, setDealerBust }) {
+
 
 
     const displayDealersHand = () => {
@@ -70,6 +72,7 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, se
             if(dealersScore > 21) {
                 setDealerBust(true);
             }
+
         }
     }, [dealersHand])
 
