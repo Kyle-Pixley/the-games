@@ -60,7 +60,6 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
             displayPlayersScore();
         }
     }, [playersHand]);
-    
     useEffect(() => {
         if(playerScore > 21) {
             setPlayerBust(true);

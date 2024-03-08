@@ -98,6 +98,7 @@ function Blackjack() {
 
         const playerStands = () => {
             setIsStand(true);
+
             setIsFlipped(true);
         };
 
@@ -152,6 +153,7 @@ function Blackjack() {
                         }
                     }));
                 });
+
             } 
     };
     
@@ -161,6 +163,7 @@ function Blackjack() {
         if(Object.keys(playersHand).length !== 0) {
             return (
                 <div>
+
                     {isStand ?  (
                         <button
                         id='next-round-button'
@@ -205,11 +208,13 @@ function Blackjack() {
                     playerBust={playerBust}
                     setPlayerBust={setPlayerBust} 
                     setPot={setPot}/>
+
                     <button
                     id='next-round-button'
                     onClick={() => nextRound()}>
                         Next Round
                     </button>
+
             </div>
         )
     }
@@ -252,7 +257,6 @@ function Blackjack() {
                         id='draw-cards-button'
                         //! HERE change this so the it is not a brand new deck every round
                         onClick={() => fetchDeck()}>Draw Cards</button>
-
                         <div id='bet-container'>
                             <h3>Bet Amount</h3>
                             <div id='bet-button-container'>
@@ -287,6 +291,7 @@ function Blackjack() {
                                     <p className='bet-text' id='bet-text-5'>$100</p>
                                 </button>
                             </div>
+
                         </div>
                     </div>
                     )}
