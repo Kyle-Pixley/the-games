@@ -23,7 +23,28 @@ function Blackjack() {
     const [ dealerBust, setDealerBust ] = useState(false);
     const [ isStand, setIsStand ] = useState(false);
     const [ isFlipped, setIsFlipped ] = useState(false);
+    const [ isRoundOver, setIsRoundOver ] = useState(false);
 
+    const nextRound = () => {
+        // todo The deck still = the deck so this does not go back to the bet page. Need to change fetching the original deck to be a useEffect with no dependency and figure out how to change the logic {deck?'game play':'first page'}
+        setPlayersHand('');
+        setDealersHand('');
+        setPlayerBust(false);
+        //todo when player busts and hit nextRound() it immediately goes to the bust page once more need to set this t
+        setDealerBust(false);
+        setIsStand(false);
+        setIsFlipped(false);
+
+        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/`)
+
+        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`)
+            .then(res => res.json())
+            .then(shuffledDeck => {
+                setDeck(shuffledDeck)
+            })
+            .catch(err => console.log(err, " shuffle error"))
+        
+    }
 
     const fetchDeck = () => {
         fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
@@ -42,7 +63,6 @@ function Blackjack() {
     },[deck])
     
     const drawTwoCards = () => {
-        // setDeckId(deck.deck_id)
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
         .then(res => res.json())
         .then(twoCards => {
@@ -78,24 +98,49 @@ function Blackjack() {
 
         const playerStands = () => {
             setIsStand(true);
+
+            setIsFlipped(true);
         };
 
         useEffect(() => {
-            console.log(playersHand)
             if(isStand){
-                if(playerScore > dealersScore && playerScore != 21){
+                if(17 > dealersScore && playerScore != 21 && dealersScore < 21){
                     dealerHitStand();
-                //! this logic below will not go here
-                } else if(playerScore === 21 && playersHand.twoCards.cards.length === 2) {
-                    setPlayerPoints(playerPoints + (pot * 2.5))
-                } else if(playerScore) {
-                    console.log('stuff')
                 }
+
+                if (dealersScore > 21 || dealersScore > playerScore || playerScore === 21) {
+                    playerPointsLogic();
+                }
+
             }
-        }, [isStand]);
+        }, [isStand,dealersScore]);
+
+    const playerPointsLogic = () => {
+        console.log('player points logic')
+        if(playerScore === 21) {
+        console.log("one")
+            setPlayerPoints(playerPoints + (pot * 2.5))
+            setPot(0)
+        } else if(playerScore > dealersScore || (dealersScore > 21 && playerScore <= 21)) {
+            console.log("two")
+            setPlayerPoints(playerPoints + (pot * 2))
+            setPot(0)
+        } else if(playerScore === dealersScore) {
+            console.log("three")
+            setPlayerPoints(playerPoints + pot)
+            setPot(0)
+        } else if(playerScore < dealersScore) {
+            console.log("four")
+            setPot(0)
+        } else if(playerScore === dealersScore) {
+            console.log('five')
+            setPlayerPoints(playerPoints + pot)
+            setPot(0)
+        }
+    };
 
     const dealerHitStand = () => {
-
+        console.log('this ran')
             if(dealersScore < 21) {
                 fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
                 .then(res => res.json())
@@ -108,27 +153,37 @@ function Blackjack() {
                         }
                     }));
                 });
-            } else if (dealersScore > 21) {
-                setDealerBust(true);
-                console.log(dealerBust, ' dealer bust??')
-            }
-        
+
+            } 
     };
+    
 
     //add more cards to players hand
     const hitMoreCardsButton = () => {
         if(Object.keys(playersHand).length !== 0) {
             return (
                 <div>
-                    <button 
-                    id='hit-button'
-                    onClick={() => addCardToPlayer()}>
-                        Hit Me!
-                    </button>
-                    <button id='stand-button'
-                    onClick={() => playerStands()}>
-                        Stand
-                    </button>
+
+                    {isStand ?  (
+                        <button
+                        id='next-round-button'
+                        onClick={() => nextRound()}>
+                            Next Round
+                        </button>
+                    ) : (
+                    <div>
+                        <button 
+                        id='hit-button'
+                        onClick={() => addCardToPlayer()}>
+                            Hit Me!
+                        </button>
+
+                        <button id='stand-button'
+                        onClick={() => playerStands()}>
+                            Stand
+                        </button>
+                    </div>
+                    )}
                 </div>
             )
         }
@@ -153,6 +208,13 @@ function Blackjack() {
                     playerBust={playerBust}
                     setPlayerBust={setPlayerBust} 
                     setPot={setPot}/>
+
+                    <button
+                    id='next-round-button'
+                    onClick={() => nextRound()}>
+                        Next Round
+                    </button>
+
             </div>
         )
     }
@@ -166,6 +228,7 @@ function Blackjack() {
                 <div>
                 
                 <DealersHand 
+                deck={deck}
                 dealersHand={dealersHand}
                 dealersScore={dealersScore}
                 setDealersScore={setDealersScore}
@@ -192,6 +255,7 @@ function Blackjack() {
                         <div id='pre-game-buttons'>
                         <button
                         id='draw-cards-button'
+                        //! HERE change this so the it is not a brand new deck every round
                         onClick={() => fetchDeck()}>Draw Cards</button>
                         <div id='bet-container'>
                             <h3>Bet Amount</h3>
