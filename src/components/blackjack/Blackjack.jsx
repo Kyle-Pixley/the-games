@@ -30,6 +30,7 @@ function Blackjack() {
         setPlayersHand('');
         setDealersHand('');
         setPlayerBust(false);
+        //todo when player busts and hit nextRound() it immediately goes to the bust page once more need to set this t
         setDealerBust(false);
         setIsStand(false);
         setIsFlipped(false);
@@ -45,7 +46,6 @@ function Blackjack() {
         
     }
 
-    // probably change this to execute when the page loads make it a use effect with no dependencies 
     const fetchDeck = () => {
         fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
             .then(res => res.json())
@@ -102,7 +102,6 @@ function Blackjack() {
         };
 
         useEffect(() => {
-            console.log(playersHand)
             if(isStand){
                 if(17 > dealersScore && playerScore != 21 && dealersScore < 21){
                     dealerHitStand();
