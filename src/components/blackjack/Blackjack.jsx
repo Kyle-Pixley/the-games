@@ -23,9 +23,26 @@ function Blackjack() {
     const [ dealerBust, setDealerBust ] = useState(false);
     const [ isStand, setIsStand ] = useState(false);
     const [ isFlipped, setIsFlipped ] = useState(false);
+    const [ isRoundOver, setIsRoundOver ] = useState(false);
 
     const nextRound = () => {
-        // set everything back to default except player points and the deck but probably fetch the deck to shuffle 
+        // todo The deck still = the deck so this does not go back to the bet page. Need to change fetching the original deck to be a useEffect with no dependency and figure out how to change the logic {deck?'game play':'first page'}
+        setPlayersHand('');
+        setDealersHand('');
+        setPlayerBust(false);
+        setDealerBust(false);
+        setIsStand(false);
+        setIsFlipped(false);
+
+        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/`)
+
+        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`)
+            .then(res => res.json())
+            .then(shuffledDeck => {
+                setDeck(shuffledDeck)
+            })
+            .catch(err => console.log(err, " shuffle error"))
+        
     }
 
     // probably change this to execute when the page loads make it a use effect with no dependencies 
@@ -81,32 +98,46 @@ function Blackjack() {
 
         const playerStands = () => {
             setIsStand(true);
+            setIsFlipped(true);
         };
 
         useEffect(() => {
             console.log(playersHand)
             if(isStand){
-                if(playerScore > dealersScore && playerScore != 21){
+                if(17 > dealersScore && playerScore != 21 && dealersScore < 21){
                     dealerHitStand();
                 }
 
-                if (dealersScore > 21) {
-                    setDealerBust(true);
-                    console.log('dealer bust??')
+                if (dealersScore > 21 || dealersScore > playerScore || playerScore === 21) {
+                    playerPointsLogic();
                 }
 
-            //! this (above) is not taken into effect in this (below)
-                if(playerScore === 21) {
-                    setPlayerPoints(playerPoints + (pot * 2.5))
-                } else if(playerScore > dealersScore) {
-                    setPlayerPoints(playerPoints + (pot * 2))
-                } else if(playerScore === dealersScore) {
-                    setPlayerPoints(playerPoints + pot)
-                } else if(playerScore < dealersScore) {
-                    setPot(0)
-                }
             }
         }, [isStand,dealersScore]);
+
+    const playerPointsLogic = () => {
+        console.log('player points logic')
+        if(playerScore === 21) {
+        console.log("one")
+            setPlayerPoints(playerPoints + (pot * 2.5))
+            setPot(0)
+        } else if(playerScore > dealersScore || (dealersScore > 21 && playerScore <= 21)) {
+            console.log("two")
+            setPlayerPoints(playerPoints + (pot * 2))
+            setPot(0)
+        } else if(playerScore === dealersScore) {
+            console.log("three")
+            setPlayerPoints(playerPoints + pot)
+            setPot(0)
+        } else if(playerScore < dealersScore) {
+            console.log("four")
+            setPot(0)
+        } else if(playerScore === dealersScore) {
+            console.log('five')
+            setPlayerPoints(playerPoints + pot)
+            setPot(0)
+        }
+    };
 
     const dealerHitStand = () => {
         console.log('this ran')
@@ -131,15 +162,26 @@ function Blackjack() {
         if(Object.keys(playersHand).length !== 0) {
             return (
                 <div>
-                    <button 
-                    id='hit-button'
-                    onClick={() => addCardToPlayer()}>
-                        Hit Me!
-                    </button>
-                    <button id='stand-button'
-                    onClick={() => playerStands()}>
-                        Stand
-                    </button>
+                    {isStand ?  (
+                        <button
+                        id='next-round-button'
+                        onClick={() => nextRound()}>
+                            Next Round
+                        </button>
+                    ) : (
+                    <div>
+                        <button 
+                        id='hit-button'
+                        onClick={() => addCardToPlayer()}>
+                            Hit Me!
+                        </button>
+
+                        <button id='stand-button'
+                        onClick={() => playerStands()}>
+                            Stand
+                        </button>
+                    </div>
+                    )}
                 </div>
             )
         }
@@ -164,6 +206,11 @@ function Blackjack() {
                     playerBust={playerBust}
                     setPlayerBust={setPlayerBust} 
                     setPot={setPot}/>
+                    <button
+                    id='next-round-button'
+                    onClick={() => nextRound()}>
+                        Next Round
+                    </button>
             </div>
         )
     }
@@ -177,6 +224,7 @@ function Blackjack() {
                 <div>
                 
                 <DealersHand 
+                deck={deck}
                 dealersHand={dealersHand}
                 dealersScore={dealersScore}
                 setDealersScore={setDealersScore}

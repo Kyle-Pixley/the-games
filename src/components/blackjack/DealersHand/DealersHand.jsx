@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './DealersHand.css'
 
-function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, setIsFlipped, setDealerBust }) {
+function DealersHand({ deck, dealersHand, dealersScore, setDealersScore, isFlipped, setIsFlipped, setDealerBust }) {
 
 
     const displayDealersHand = () => {
@@ -16,18 +16,14 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, se
         }
     };
 
-
-    const flipCard = () => {
-        setIsFlipped(!isFlipped);
-    }
     const hiddenCard = (card, i) => {
         return (
             <div id='dealers-card-front-back-container'>
                 {isFlipped ? (
-                    <img className='dealers-card-images' id='dealers-card-number-1' key={i+'front'} src={card.image} alt={`Card ${i + 1}`}  onClick={flipCard}/>
+                    <img className='dealers-card-images' id='dealers-card-number-1' key={i+'front'} src={card.image} alt={`Card ${i + 1}`} />
                     )
                     : (
-                        <img className='dealers-card-images' id='dealers-card-number-1-back' key={i+'back'} src='https://deckofcardsapi.com/static/img/back.png' alt={`Back of Card ${i + 1}`}  onClick={flipCard}/>
+                        <img className='dealers-card-images' id='dealers-card-number-1-back' key={i+'back'} src='https://deckofcardsapi.com/static/img/back.png' alt={`Back of Card ${i + 1}`} />
                     )
                 }  
             </div>
@@ -66,6 +62,8 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, se
 
     useEffect(() => {
         if(dealersHand != ''){
+            console.log(dealersHand.dealersTwoCards.cards[1].value)
+            console.log(isFlipped)
             displayDealersScore();
             if(dealersScore > 21) {
                 setDealerBust(true);
@@ -73,13 +71,22 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, se
         }
     }, [dealersHand])
 
+    const displayDealersScoreIfFlipped = () => {
+        if(!isFlipped && dealersHand) {
+            return (
+                <h2>{dealersScore - Number(dealersHand.dealersTwoCards.cards[1].value)}+?</h2>
+            )
+        } else return (<h2>{dealersScore}</h2>)
+    }
+
 
 
   return (
     <div id='dealers-hand-container'>
         <div id='dealers-spot-container'>
             <div>
-                <h2>{dealersScore}</h2>
+                {displayDealersScoreIfFlipped()}
+
             </div>
             <div id='dealers-card-images-container'>
                 {displayDealersHand()}
