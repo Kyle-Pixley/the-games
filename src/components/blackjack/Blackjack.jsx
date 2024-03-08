@@ -24,7 +24,11 @@ function Blackjack() {
     const [ isStand, setIsStand ] = useState(false);
     const [ isFlipped, setIsFlipped ] = useState(false);
 
+    const nextRound = () => {
+        // set everything back to default except player points and the deck but probably fetch the deck to shuffle 
+    }
 
+    // probably change this to execute when the page loads make it a use effect with no dependencies 
     const fetchDeck = () => {
         fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
             .then(res => res.json())
@@ -42,7 +46,6 @@ function Blackjack() {
     },[deck])
     
     const drawTwoCards = () => {
-        // setDeckId(deck.deck_id)
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
         .then(res => res.json())
         .then(twoCards => {
@@ -85,17 +88,28 @@ function Blackjack() {
             if(isStand){
                 if(playerScore > dealersScore && playerScore != 21){
                     dealerHitStand();
-                //! this logic below will not go here
-                } else if(playerScore === 21 && playersHand.twoCards.cards.length === 2) {
+                }
+
+                if (dealersScore > 21) {
+                    setDealerBust(true);
+                    console.log('dealer bust??')
+                }
+
+            //! this (above) is not taken into effect in this (below)
+                if(playerScore === 21) {
                     setPlayerPoints(playerPoints + (pot * 2.5))
-                } else if(playerScore) {
-                    console.log('stuff')
+                } else if(playerScore > dealersScore) {
+                    setPlayerPoints(playerPoints + (pot * 2))
+                } else if(playerScore === dealersScore) {
+                    setPlayerPoints(playerPoints + pot)
+                } else if(playerScore < dealersScore) {
+                    setPot(0)
                 }
             }
-        }, [isStand]);
+        }, [isStand,dealersScore]);
 
     const dealerHitStand = () => {
-
+        console.log('this ran')
             if(dealersScore < 21) {
                 fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
                 .then(res => res.json())
@@ -108,12 +122,9 @@ function Blackjack() {
                         }
                     }));
                 });
-            } else if (dealersScore > 21) {
-                setDealerBust(true);
-                console.log(dealerBust, ' dealer bust??')
-            }
-        
+            } 
     };
+    
 
     //add more cards to players hand
     const hitMoreCardsButton = () => {
@@ -192,7 +203,9 @@ function Blackjack() {
                         <div id='pre-game-buttons'>
                         <button
                         id='draw-cards-button'
+                        //! HERE change this so the it is not a brand new deck every round
                         onClick={() => fetchDeck()}>Draw Cards</button>
+
                         <div id='bet-container'>
                             <h3>Bet Amount</h3>
                             <div id='bet-button-container'>
