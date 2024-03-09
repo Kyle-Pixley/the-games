@@ -104,53 +104,58 @@ function Blackjack() {
         };
 
         useEffect(() => {
+            //! when playerScore === dealerScore the playerPointLogic function does not run
             if(isStand){
-                if(17 > dealersScore && playerScore != 21 && dealersScore < 21){
-                    dealerHitStand();
-                }
 
-                if (dealersScore && playerScore) {
+                if(17 > dealersScore && dealersScore < 21){
+                    dealerHitStand();
+                } else {
                     playerPointsLogic();
                 }
 
+                // if (dealersScore > 17) {
+                //     console.log('this here')
+                //     playerPointsLogic();
+                // }
+
             }
         }, [isStand,dealersScore]);
+        
+        const dealerHitStand = () => {
+                if(dealersScore < 21) {
+                    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
+                    .then(res => res.json())
+                    .then(dealerHitCard => {
+                        setDealersHand(prevState => ({
+                            ...prevState,
+                            dealersTwoCards: {
+                                ...prevState.dealersTwoCards,
+                                cards: [...prevState.dealersTwoCards.cards, dealerHitCard.cards[0]]
+                            }
+                        }));
+                    });
+                } 
+        };
 
+
+        //todo something is wrong here
     const playerPointsLogic = () => {
-        if(playerScore === 21) {
+        console.log('player points logic ran')
+        if(playerScore === 21 && dealersScore != 21) {
             setPlayerPoints(playerPoints + (pot * 2.5))
             setPot(0)
         } else if(playerScore > dealersScore || (dealersScore > 21 && playerScore <= 21)) {
             setPlayerPoints(playerPoints + (pot * 2))
             setPot(0)
+            console.log('two player points logic')
         } else if(playerScore === dealersScore) {
             setPlayerPoints(playerPoints + pot)
             setPot(0)
         } else if(playerScore < dealersScore) {
             setPot(0)
-        } else if(playerScore === dealersScore) {
-            setPlayerPoints(playerPoints + pot)
-            setPot(0)
-        }
-    };
-
-    const dealerHitStand = () => {
-            if(dealersScore < 21) {
-                fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
-                .then(res => res.json())
-                .then(dealerHitCard => {
-                    setDealersHand(prevState => ({
-                        ...prevState,
-                        dealersTwoCards: {
-                            ...prevState.dealersTwoCards,
-                            cards: [...prevState.dealersTwoCards.cards, dealerHitCard.cards[0]]
-                        }
-                    }));
-                });
-            } 
+        };
     };
     
-
     //add more cards to players hand
     const hitMoreCardsButton = () => {
         if(Object.keys(playersHand).length !== 0) {
