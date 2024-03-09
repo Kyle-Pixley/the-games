@@ -62,20 +62,12 @@ function DealersHand({ deck, dealersHand, dealersScore, setDealersScore, isFlipp
 
     useEffect(() => {
         if(dealersHand != ''){
-            console.log(dealersHand.dealersTwoCards.cards[1].value)
             displayDealersScore();
             if(dealersScore > 21) {
                 setDealerBust(true);
             }
         }
     }, [dealersHand]);
-    
-    
-    useEffect(() => {
-        if(dealersHand) {
-            console.log(typeof(dealersScoreValue()))
-        }
-    },[dealersHand])
 
     const dealersScoreValue = () => {
         if(dealersHand.dealersTwoCards.cards[1].value === "JACK" || dealersHand.dealersTwoCards.cards[1].value === "QUEEN" || dealersHand.dealersTwoCards.cards[1].value === "KING") {

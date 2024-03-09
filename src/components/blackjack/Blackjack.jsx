@@ -23,30 +23,56 @@ function Blackjack() {
     const [ dealerBust, setDealerBust ] = useState(false);
     const [ isStand, setIsStand ] = useState(false);
     const [ isFlipped, setIsFlipped ] = useState(false);
-    const [ isRoundOver, setIsRoundOver ] = useState(false);
+    const [ bettingPhase, setBettingPhase ] = useState(true);
+    const [ roundNumber, setRoundNumber ] = useState(0);
 
     const nextRound = () => {
-        // todo The deck still = the deck so this does not go back to the bet page. Need to change fetching the original deck to be a useEffect with no dependency and figure out how to change the logic {deck?'game play':'first page'}
+        setRoundNumber(roundNumber + 1);
+        shuffleTheDeck();
         setPlayersHand('');
         setDealersHand('');
         setPlayerBust(false);
-        //todo when player busts and hit nextRound() it immediately goes to the bust page once more need to set this t
         setDealerBust(false);
         setIsStand(false);
         setIsFlipped(false);
+        shuffleTheDeck();
+        setBettingPhase(true);
+    };
 
+    // useEffect(() => {
+    //     setPlayersHand('');
+    //     setDealersHand('');
+    //     setPlayerBust(false);
+    //     setDealerBust(false);
+    //     setIsStand(false);
+    //     setIsFlipped(false);
+    //     setBettingPhase(true);
+    // },[roundNumber])
+
+    const shuffleTheDeck = () => {
+        
+        console.log('the deck is shuffling')
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/`)
-
+    
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`)
             .then(res => res.json())
             .then(shuffledDeck => {
                 setDeck(shuffledDeck)
             })
             .catch(err => console.log(err, " shuffle error"))
-        
-    }
+    };
 
-    const fetchDeck = () => {
+    // const fetchDeck = () => {
+    //     fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
+    //         .then(res => res.json())
+    //         .then(deck => {
+    //             setDeck(deck)
+    //             setDeckId(deck.deck_id)
+    //         })
+    //         .catch(err => console.log(err))
+    // };
+
+    useEffect(() => {
         fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
             .then(res => res.json())
             .then(deck => {
@@ -54,13 +80,13 @@ function Blackjack() {
                 setDeckId(deck.deck_id)
             })
             .catch(err => console.log(err))
-    };
+    }, [])
 
     useEffect(() => {
-        if(deck != '') {
+        if(deck != '' && !bettingPhase) {
             drawTwoCards();
         }
-    },[deck])
+    },[bettingPhase])
     
     const drawTwoCards = () => {
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
@@ -107,7 +133,7 @@ function Blackjack() {
                     dealerHitStand();
                 }
 
-                if (dealersScore > 21 || dealersScore > playerScore || playerScore === 21) {
+                if (dealersScore && playerScore) {
                     playerPointsLogic();
                 }
 
@@ -139,7 +165,6 @@ function Blackjack() {
     };
 
     const dealerHitStand = () => {
-        console.log('this ran')
             if(dealersScore < 21) {
                 fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
                 .then(res => res.json())
@@ -192,6 +217,7 @@ function Blackjack() {
         } else null
     };
     const playerHasBusted = () => {
+        console.log(playerBust, ' player bust')
         return (
             <div id='busted-container'>
                 <h1 id='busted-title'>BUST!</h1>
@@ -245,13 +271,13 @@ function Blackjack() {
             setPot={setPot}/>
 
             <div id='buttons-for-game'>
-                {deck ? null
+                {!bettingPhase ? null
                     : (
                         <div id='pre-game-buttons'>
                         <button
                         id='draw-cards-button'
                         //! HERE change this so the it is not a brand new deck every round
-                        onClick={() => fetchDeck()}>Draw Cards</button>
+                        onClick={() => setBettingPhase(false)}>Draw Cards</button>
 
                         <div id='bet-container'>
                             <h3>Bet Amount</h3>
