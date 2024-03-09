@@ -39,21 +39,8 @@ function Blackjack() {
         setBettingPhase(true);
     };
 
-    // useEffect(() => {
-    //     setPlayersHand('');
-    //     setDealersHand('');
-    //     setPlayerBust(false);
-    //     setDealerBust(false);
-    //     setIsStand(false);
-    //     setIsFlipped(false);
-    //     setBettingPhase(true);
-    // },[roundNumber])
-
     const shuffleTheDeck = () => {
-        
-        console.log('the deck is shuffling')
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/`)
-    
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`)
             .then(res => res.json())
             .then(shuffledDeck => {
@@ -61,16 +48,6 @@ function Blackjack() {
             })
             .catch(err => console.log(err, " shuffle error"))
     };
-
-    // const fetchDeck = () => {
-    //     fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
-    //         .then(res => res.json())
-    //         .then(deck => {
-    //             setDeck(deck)
-    //             setDeckId(deck.deck_id)
-    //         })
-    //         .catch(err => console.log(err))
-    // };
 
     useEffect(() => {
         fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
@@ -110,7 +87,6 @@ function Blackjack() {
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
             .then(res => res.json())
             .then(hitCard => {
-                console.log(hitCard, 'this here should only be one card')
                 setPlayersHand(prevState => ({
                     ...prevState,
                     twoCards: {
@@ -141,24 +117,18 @@ function Blackjack() {
         }, [isStand,dealersScore]);
 
     const playerPointsLogic = () => {
-        console.log('player points logic')
         if(playerScore === 21) {
-        console.log("one")
             setPlayerPoints(playerPoints + (pot * 2.5))
             setPot(0)
         } else if(playerScore > dealersScore || (dealersScore > 21 && playerScore <= 21)) {
-            console.log("two")
             setPlayerPoints(playerPoints + (pot * 2))
             setPot(0)
         } else if(playerScore === dealersScore) {
-            console.log("three")
             setPlayerPoints(playerPoints + pot)
             setPot(0)
         } else if(playerScore < dealersScore) {
-            console.log("four")
             setPot(0)
         } else if(playerScore === dealersScore) {
-            console.log('five')
             setPlayerPoints(playerPoints + pot)
             setPot(0)
         }
@@ -217,7 +187,6 @@ function Blackjack() {
         } else null
     };
     const playerHasBusted = () => {
-        console.log(playerBust, ' player bust')
         return (
             <div id='busted-container'>
                 <h1 id='busted-title'>BUST!</h1>
@@ -276,7 +245,6 @@ function Blackjack() {
                         <div id='pre-game-buttons'>
                         <button
                         id='draw-cards-button'
-                        //! HERE change this so the it is not a brand new deck every round
                         onClick={() => setBettingPhase(false)}>Draw Cards</button>
 
                         <div id='bet-container'>
