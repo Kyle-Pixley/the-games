@@ -87,6 +87,7 @@ function Blackjack() {
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
             .then(res => res.json())
             .then(hitCard => {
+
                 setPlayersHand(prevState => ({
                     ...prevState,
                     twoCards: {
@@ -108,6 +109,7 @@ function Blackjack() {
                 if(17 > dealersScore && playerScore != 21 && dealersScore < 21){
                     dealerHitStand();
                 }
+
 
                 if (dealersScore && playerScore) {
                     playerPointsLogic();

@@ -29,7 +29,6 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
     const displayPlayersScore = () => {
         let totalValue = 0;
         let numberOfAces = 0;
-    
         playersHand.twoCards.cards.forEach(card => {
             let numericValue;
             if (card.value === "JACK" || card.value === "QUEEN" || card.value === "KING") {
@@ -43,11 +42,11 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
             }
             totalValue += numericValue;
         });
-    
         while (numberOfAces > 0 && totalValue + 10 <= 21) {
             totalValue += 10;
             numberOfAces--;
         }
+
         if(totalValue > 21 ){
             setPlayerBust(true);
             setPot(0);
