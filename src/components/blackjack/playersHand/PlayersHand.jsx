@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './PlayersHand.css'
 
-function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, setPot }) {
+function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, playerBust, setPot }) {
 
     const displayPlayersHand = () => {
         if(Object.keys(playersHand).length !== 0){
@@ -29,8 +29,6 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
     const displayPlayersScore = () => {
         let totalValue = 0;
         let numberOfAces = 0;
-    
-        // Calculate total value and count aces
         playersHand.twoCards.cards.forEach(card => {
             let numericValue;
             if (card.value === "JACK" || card.value === "QUEEN" || card.value === "KING") {
@@ -44,13 +42,16 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
             }
             totalValue += numericValue;
         });
-    
-        // Adjust total value if needed to avoid busting
         while (numberOfAces > 0 && totalValue + 10 <= 21) {
             totalValue += 10;
             numberOfAces--;
         }
-    
+
+        if(totalValue > 21 ){
+            setPlayerBust(true);
+            setPot(0);
+        }
+        
         setPlayerScore(totalValue);
     };
     
@@ -60,12 +61,6 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
             displayPlayersScore();
         }
     }, [playersHand]);
-    useEffect(() => {
-        if(playerScore > 21) {
-            setPlayerBust(true);
-            setPot(0);
-        }
-    }, [playerScore])
 
 
   return (
