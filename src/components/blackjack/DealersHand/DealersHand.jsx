@@ -9,7 +9,7 @@ function DealersHand({ deck, dealersHand, dealersScore, setDealersScore, isFlipp
                 i === 1 ? 
                     hiddenCard(card, i)
                     :
-                    <img className='dealers-card-images' id={dealersCardRotation(i)} key={i} src={card.image} alt={`Card ${i + 1}`}/>
+                    <img className='dealers-card-images' id={dealersCardRotation(i)} key={`dealerCardImage${i}`} src={card.image} alt={`Card ${i + 1}`}/>
             ));
             return cardImages;
         }
@@ -19,10 +19,10 @@ function DealersHand({ deck, dealersHand, dealersScore, setDealersScore, isFlipp
         return (
             <div id='dealers-card-front-back-container'>
                 {isFlipped ? (
-                    <img className='dealers-card-images' id='dealers-card-number-1' key={i+'front'} src={card.image} alt={`Card ${i + 1}`} />
+                    <img className='dealers-card-images' id='dealers-card-number-1' key={`front ${i}`} src={card.image} alt={`Card ${i + 1}`} />
                     )
                     : (
-                        <img className='dealers-card-images' id='dealers-card-number-1-back' key={i+'back'} src='https://deckofcardsapi.com/static/img/back.png' alt={`Back of Card ${i + 1}`} />
+                        <img className='dealers-card-images' id='dealers-card-number-1-back' key={`back ${i}`} src='https://deckofcardsapi.com/static/img/back.png' alt={`Back of Card ${i + 1}`} />
                     )
                 }  
             </div>
