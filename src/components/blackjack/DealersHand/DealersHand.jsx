@@ -3,7 +3,6 @@ import './DealersHand.css'
 
 function DealersHand({ deck, dealersHand, dealersScore, setDealersScore, isFlipped, setIsFlipped, setDealerBust }) {
 
-
     const displayDealersHand = () => {
         if(Object.keys(dealersHand).length !== 0){
             const cardImages = dealersHand.dealersTwoCards.cards.map((card, i) => (
@@ -96,7 +95,6 @@ function DealersHand({ deck, dealersHand, dealersScore, setDealersScore, isFlipp
         <div id='dealers-spot-container'>
             <div>
                 {displayDealersScoreIfFlipped()}
-
             </div>
             <div id='dealers-card-images-container'>
                 {displayDealersHand()}
