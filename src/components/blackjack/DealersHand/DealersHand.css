@@ -4,7 +4,8 @@
 }
 #dealers-spot-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding: 0 5em;
 }
 #dealers-card-images-container {
     margin-top: 3vh;

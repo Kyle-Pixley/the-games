@@ -1,3 +1,10 @@
 #pot-container {
-    color: red;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 200%;
+}
+#pot-image-container {
+    position: absolute;
+    top: 40%;
+    right: 37%;
 }
