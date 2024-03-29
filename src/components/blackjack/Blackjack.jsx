@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 import PlayersHand from './playersHand/PlayersHand';
 import DealersHand from './DealersHand/DealersHand';
 import Pot from './Pot/Pot';
-import WhiteChip from '../../assets/white-chip.png';
-import BlueChip from '../../assets/blue-chip.png';
-import RedChip from '../../assets/red-chip.png';
-import GreenChip from '../../assets/green-chip.png';
-import BlackChip from '../../assets/black-chip.png';
+import WhiteChip from '../../assets/white-chip-text.png';
+import BlueChip from '../../assets/blue-chip-text.png';
+import RedChip from '../../assets/red-chip-text.png';
+import GreenChip from '../../assets/green-chip-text.png';
 import './Blackjack.css';
 
 function Blackjack() {
@@ -230,9 +229,9 @@ function Blackjack() {
                 isFlipped={isFlipped}
                 setIsFlipped={setIsFlipped} 
                 setDealerBust={setDealerBust}/>
-
-            <Pot pot={pot} setPot={setPot}/>
-
+                
+                <Pot pot={pot} setPot={setPot}/>
+                
             <PlayersHand 
             playersHand={playersHand} 
             playerScore={playerScore} 
@@ -259,31 +258,21 @@ function Blackjack() {
                                 onClick={() => addToPot(1)}
                                 className='bet-buttons'>
                                     <img className='bet-images' src={WhiteChip}/>
-                                    <p className='bet-text' id='bet-text-1'>$1</p>
                                 </button>
                                 <button
                                 onClick={() => addToPot(5)}
                                 className='bet-buttons'>
                                     <img className='bet-images' src={BlueChip}/>
-                                    <p className='bet-text' id='bet-text-2'>$5</p>
                                 </button>
                                 <button
                                 onClick={() => addToPot(10)}
                                 className='bet-buttons'>
                                     <img className='bet-images' src={RedChip}/>
-                                    <p className='bet-text' id='bet-text-3'>$10</p>
                                 </button>
                                 <button
                                 onClick={() => addToPot(50)}
                                 className='bet-buttons'>
                                     <img className='bet-images' src={GreenChip}/>
-                                    <p className='bet-text' id='bet-text-4'>$50</p>
-                                </button>
-                                <button
-                                onClick={() => addToPot(100)}
-                                className='bet-buttons'>
-                                    <img className='bet-images' src={BlackChip}/>
-                                    <p className='bet-text' id='bet-text-5'>$100</p>
                                 </button>
                             </div>
                         </div>
