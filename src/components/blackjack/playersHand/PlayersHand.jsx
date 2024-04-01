@@ -77,9 +77,7 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
                     </div>
                 </div>
             ) : (
-            <div>
-                <h1 id='title-banner'></h1>
-            </div>
+                null
             )}
         <div id='players-score'>
         </div>
