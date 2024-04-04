@@ -1,5 +1,5 @@
 #dealers-hand-container {
-    height: 40vh;
+    height: 35%;
     border: 1px solid black;
 }
 #dealers-spot-container {
@@ -32,8 +32,6 @@
 
 #dealer-card-number-1 {
     animation: rotate15 0s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    /* animation: flip 0.5s cubic-bezier(.455, .03, .515, .955) both; */
-    /* transition: transform 0.5s; */
 }
 
 
@@ -133,14 +131,18 @@
         transform: translateX(0) rotate(-25deg);
     }
 }
-  @keyframes flip {
+@keyframes flip {
     0% {
-              transform: translateX(0) rotateY(0);
-              transform-origin: 0% 50%;
+            transform: translateX(0) rotateY(0);
+            transform-origin: 0% 50%;
     }
     100% {
-              transform: translateX(-100%) rotateY(180deg);
-              transform-origin: 100% 0%;
+            transform: translateX(-100%) rotateY(180deg);
+            transform-origin: 100% 0%;
     }
-  }
-  
+}
+@media (max-width: 480px) {
+    .dealers-card-images {
+        width: 22vw;
+    }
+}

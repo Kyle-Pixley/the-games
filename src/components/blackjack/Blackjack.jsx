@@ -219,7 +219,7 @@ function Blackjack() {
             {playerBust ? 
             playerHasBusted() 
             : (
-                <div>
+                <div id='playing-the-game'>
                 
                 <DealersHand 
                 deck={deck}
@@ -250,29 +250,40 @@ function Blackjack() {
                         <button
                         id='draw-cards-button'
                         onClick={() => setBettingPhase(false)}>Draw Cards</button>
-
                         <div id='bet-container'>
                             <h3>Bet Amount</h3>
                             <div id='bet-button-container'>
                                 <button
                                 onClick={() => addToPot(1)}
                                 className='bet-buttons'>
-                                    <img className='bet-images' src={WhiteChip}/>
+                                    <img 
+                                    id='bet-image-1'
+                                    className='bet-images' 
+                                    src={WhiteChip}/>
                                 </button>
                                 <button
                                 onClick={() => addToPot(5)}
                                 className='bet-buttons'>
-                                    <img className='bet-images' src={BlueChip}/>
+                                    <img 
+                                    id='bet-image-5'
+                                    className='bet-images' 
+                                    src={BlueChip}/>
                                 </button>
                                 <button
                                 onClick={() => addToPot(10)}
                                 className='bet-buttons'>
-                                    <img className='bet-images' src={RedChip}/>
+                                    <img 
+                                    id='bet-image-10'
+                                    className='bet-images' 
+                                    src={RedChip}/>
                                 </button>
                                 <button
                                 onClick={() => addToPot(50)}
                                 className='bet-buttons'>
-                                    <img className='bet-images' src={GreenChip}/>
+                                    <img 
+                                    id='bet-image-50'
+                                    className='bet-images' 
+                                    src={GreenChip}/>
                                 </button>
                             </div>
                         </div>
