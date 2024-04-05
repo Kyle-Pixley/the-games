@@ -12,9 +12,11 @@
     width: 100%;
     height: 20vh;
     position: relative;
-    border-top: 2px solid black;
     padding-top: 1vh;
-    box-shadow: inset 0px 2px 2px black;
+    box-shadow: inset 0px 5px 8px black;
+    background-image: url(https://i.pinimg.com/736x/4e/e9/b7/4ee9b70c1fb47e0459707a7f85610e92.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 #pre-game-buttons {
     display: flex;
@@ -23,9 +25,19 @@
 #draw-cards-button {
     height: 1em;
     padding: 1em 2.5em;
-    margin: auto;
+    padding-bottom: 2.2em;
+    margin: 2em 1em;
     font-size: 2.5vh;
-    padding-bottom: 2.5em;
+    border: none;
+    border-radius: 50%;
+    box-shadow: inset 3px 5px 3px white, 3px 5px 3px black;
+    background-color: lightgreen;
+}
+#draw-cards-button:hover {
+    cursor: pointer;
+}
+#draw-cards-button:active {
+    box-shadow: inset 3px 5px 3px green, 1px 1px 1px #d1ffbd;
 }
 #bet-container {
     width: 50vw;
@@ -45,6 +57,7 @@
     width: 9.5vh;
     border-radius: 100%;
     box-shadow: 2px 2px 1px black;
+    margin-right: .5em;
 }
 .bet-buttons:hover {
     cursor: pointer;
@@ -66,8 +79,8 @@
 }
 #player-points {
     position: absolute;
-    right: 10px;
-    top: 0;
+    right: 3vw;
+    top: 3vw;
 }
 #busted-title {
     text-align: center;
@@ -108,5 +121,11 @@
         width: 100%;
         height: 11vw;
         margin-top: -2px;
+    }
+    #draw-cards-button {
+        width: 40vw;
+        font-size: 4vw;
+        font-weight: 600;
+        padding: 2em 0 3em;
     }
 }

@@ -249,7 +249,7 @@ function Blackjack() {
                         <div id='pre-game-buttons'>
                         <button
                         id='draw-cards-button'
-                        onClick={() => setBettingPhase(false)}>Draw Cards</button>
+                        onClick={() => setBettingPhase(false)}>Start Round</button>
                         <div id='bet-container'>
                             <h3>Bet Amount</h3>
                             <div id='bet-button-container'>
