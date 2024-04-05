@@ -1,6 +1,5 @@
 #dealers-hand-container {
     height: 35%;
-    border: 1px solid black;
 }
 #dealers-spot-container {
     display: flex;
