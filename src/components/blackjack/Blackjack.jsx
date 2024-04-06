@@ -103,7 +103,6 @@ function Blackjack() {
         };
 
         useEffect(() => {
-            //! when playerScore === dealerScore the playerPointLogic function does not run
             if(isStand){
 
                 if(17 > dealersScore && dealersScore < 21){
@@ -111,12 +110,6 @@ function Blackjack() {
                 } else {
                     playerPointsLogic();
                 }
-
-                // if (dealersScore > 17) {
-                //     console.log('this here')
-                //     playerPointsLogic();
-                // }
-
             }
         }, [isStand,dealersScore]);
         
@@ -136,8 +129,6 @@ function Blackjack() {
                 } 
         };
 
-
-        //todo something is wrong here
     const playerPointsLogic = () => {
         console.log('player points logic ran')
         if(playerScore === 21 && dealersScore != 21) {
@@ -167,7 +158,7 @@ function Blackjack() {
                             Next Round
                         </button>
                     ) : (
-                    <div>
+                    <div id='hit-stand-button-container'>
                         <button 
                         id='hit-button'
                         onClick={() => addCardToPlayer()}>
@@ -204,11 +195,13 @@ function Blackjack() {
                     playerBust={playerBust}
                     setPlayerBust={setPlayerBust} 
                     setPot={setPot}/>
-                    <button
-                    id='next-round-button'
-                    onClick={() => nextRound()}>
-                        Next Round
-                    </button>
+                    <div id='next-round-bust-button-container'>
+                        <button
+                        id='next-round-button'
+                        onClick={() => nextRound()}>
+                            Next Round
+                        </button>
+                    </div>
             </div>
         )
     }

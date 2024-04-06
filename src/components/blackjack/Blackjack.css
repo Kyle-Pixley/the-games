@@ -1,5 +1,5 @@
 #blackjack-container {
-    background-color: lightgreen;
+    background-color: #92fe50;
     height: 100%;
     width: 100%;
     overflow-y: hidden;
@@ -10,13 +10,11 @@
 }
 #buttons-for-game {
     width: 100%;
-    height: 20vh;
+    height: 22vh;
     position: relative;
     padding-top: 1vh;
     box-shadow: inset 0px 5px 8px black;
-    background-image: url(https://i.pinimg.com/736x/4e/e9/b7/4ee9b70c1fb47e0459707a7f85610e92.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #73fe1f;
 }
 #pre-game-buttons {
     display: flex;
@@ -30,14 +28,14 @@
     font-size: 2.5vh;
     border: none;
     border-radius: 50%;
-    box-shadow: inset 3px 5px 3px white, 3px 5px 3px black;
-    background-color: lightgreen;
+    box-shadow: inset 3px 5px 3px #abfe78, 3px 5px 3px #318200;
+    background-color: #56e300;
 }
 #draw-cards-button:hover {
     cursor: pointer;
 }
 #draw-cards-button:active {
-    box-shadow: inset 3px 5px 3px green, 1px 1px 1px #d1ffbd;
+    box-shadow: inset 3px 5px 3px green, 1px 1px 1px #cefeb1;
 }
 #bet-container {
     width: 50vw;
@@ -82,14 +80,41 @@
     right: 3vw;
     top: 3vw;
 }
+#busted-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #busted-title {
     text-align: center;
 }
-#next-round-button {
-    z-index: 999;
-    position: absolute;
-    bottom: 50px;
-    right: 47%;
+#next-round-bust-button-container {
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+}
+#hit-stand-button-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 60vw;
+    margin: auto;
+}
+#hit-button, #stand-button, #next-round-button {
+    height: 1em;
+    padding: 1em 2.5em;
+    padding-bottom: 2.2em;
+    margin: 2em 1em;
+    font-size: 2.5vh;
+    border: none;
+    border-radius: 50%;
+    box-shadow: inset 3px 5px 3px #abfe78, 3px 5px 3px #318200;
+    background-color: #56e300;
+}
+#hit-button:hover, #stand-button:hover {
+    cursor: pointer;
+}
+#hit-button:active, #stand-button:active {
+    box-shadow: inset 3px 5px 3px green, 1px 1px 1px #cefeb1;
 }
 
 @keyframes flip-2 {
@@ -108,13 +133,15 @@
     #app-container {
         overflow-x: auto;
     }
+    #buttons-for-game {
+        height: 34vh;
+    }
     #bet-button-container {
         display: flex;
         justify-content: space-evenly;
         width: 100%;
     }
     .bet-buttons {
-        /* border: 1px solid black; */
         height: 10vw;
     }
     .bet-images {
@@ -127,5 +154,13 @@
         font-size: 4vw;
         font-weight: 600;
         padding: 2em 0 3em;
+    }
+    #hit-stand-button-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    #hit-button, #stand-button {
+        margin: 4vh 2vw;
+        width: 45vw;
     }
 }

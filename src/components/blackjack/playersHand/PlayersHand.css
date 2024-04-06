@@ -1,15 +1,19 @@
 #players-hand-container {
-    position: relative;
-    height: 35vh;
+    height: 36.5vh;
 }
 #players-spot-container {
     display: flex;
     justify-content: space-between;
+    /* border: 1px solid black; */
+    width: 90vw;
 }
 #card-image-container {
     margin-top: 4vh;
     width: 100%;
     padding-left: 8vw;
+}
+#players-score {
+    margin-right: 4vw;
 }
 #title-banner {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -155,6 +159,9 @@
     }
 }
 @media (max-width: 480px) {
+    #players-hand-container {
+        height: 33vh;
+    }
     #card-image-container {
         width: 100%;
     }

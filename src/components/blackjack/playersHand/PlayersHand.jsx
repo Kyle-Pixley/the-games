@@ -71,14 +71,12 @@ function PlayersHand({ playersHand, playerScore, setPlayerScore, setPlayerBust, 
                         {displayPlayersHand()}
                     </div>
                     <div>
-                        <h2>{playerScore}</h2>
+                        <h2 id='players-score'>{playerScore}</h2>
                     </div>
                 </div>
             ) : (
                 null
             )}
-        <div id='players-score'>
-        </div>
     </div>
   )
 }
