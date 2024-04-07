@@ -32,6 +32,7 @@ function Blackjack() {
         setDealersHand('');
         setPlayerBust(false);
         setDealerBust(false);
+        setDealersScore(0);
         setIsStand(false);
         setIsFlipped(false);
         shuffleTheDeck();
@@ -244,7 +245,7 @@ function Blackjack() {
                         id='draw-cards-button'
                         onClick={() => setBettingPhase(false)}>Start Round</button>
                         <div id='bet-container'>
-                            <h3>Bet Amount</h3>
+                            <h3 id='bet-amount-text'>Bet Amount</h3>
                             <div id='bet-button-container'>
                                 <button
                                 onClick={() => addToPot(1)}
