@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import './DealersHand.css'
 
-function DealersHand({ deck, dealersHand, dealersScore, setDealersScore, isFlipped, setIsFlipped, setDealerBust }) {
+function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, setDealerBust }) {
 
     const displayDealersHand = () => {
         if(Object.keys(dealersHand).length !== 0){
@@ -38,7 +38,6 @@ function DealersHand({ deck, dealersHand, dealersScore, setDealersScore, isFlipp
             return `dealers-card-number-${i}-2`
         }
     };
-
 
     const displayDealersScore = () => {
         const totalValue = dealersHand.dealersTwoCards.cards.reduce((acc, card) => {
@@ -81,12 +80,14 @@ function DealersHand({ deck, dealersHand, dealersScore, setDealersScore, isFlipp
 
 
     const displayDealersScoreIfFlipped = () => {
-        if(!isFlipped && dealersHand) {
+        if(dealersScore === 0) {
+            null;
+        } else if (!isFlipped && dealersHand && dealersScore != 0) {
             return (
                 <h2>{dealersScore - dealersScoreValue()}+?</h2>
             )
         } else return (<h2>{dealersScore}</h2>)
-    }
+    };
 
 
 
