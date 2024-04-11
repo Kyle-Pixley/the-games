@@ -95,7 +95,9 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, se
     <div id='dealers-hand-container'>
         <div id='dealers-spot-container'>
             <div>
-                {displayDealersScoreIfFlipped()}
+                <h2 id='dealers-score'>
+                    {displayDealersScoreIfFlipped()}
+                </h2>
             </div>
             <div id='dealers-card-images-container'>
                 {displayDealersHand()}
