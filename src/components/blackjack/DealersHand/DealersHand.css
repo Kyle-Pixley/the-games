@@ -1,10 +1,13 @@
 #dealers-hand-container {
-    height: 36.5%;
+    height: 34%;
 }
 #dealers-spot-container {
     display: flex;
     justify-content: space-between;
     padding: 0 5em;
+}
+#dealers-score {
+    font-size: 3vw;
 }
 #dealers-card-images-container {
     margin-top: 3vh;
