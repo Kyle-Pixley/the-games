@@ -24,6 +24,7 @@ function Blackjack() {
     const [ isFlipped, setIsFlipped ] = useState(false);
     const [ bettingPhase, setBettingPhase ] = useState(true);
     const [ roundNumber, setRoundNumber ] = useState(0);
+    const [ isNoMoney, setIsNoMoney ] = useState(false);
 
     const nextRound = () => {
         setRoundNumber(roundNumber + 1);

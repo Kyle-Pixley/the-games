@@ -1,9 +1,40 @@
 #pot-container {
-    text-align: center;
-    font-size: 200%;
+    text-align: center;   
+    height: 6vh;
 }
 #pot-image-container {
     position: absolute;
-    top: 40%;
-    right: 37%;
+    top: 28%;
+    right: 42%;
+    height: 20vh;
+    width: 20vh;
+    border: 1px solid black;
+}
+.pot-chip-images {
+    position: absolute;
+    width: 8vw;
+}
+#white-chip-pot-image {
+    top: 0;
+    left: 0;
+}
+#blue-chip-pot-image {
+    top: 0;
+    right: 0;
+}
+#red-chip-pot-image {
+    bottom: 0;
+    left: 0;
+}
+#green-chip-pot-image {
+    bottom: 0;
+    right: 0;
+}
+#pot-text {
+    font-size: 4vw;
+    position: relative;
+    top: 30%;
+    background-color: rgb(255, 255, 255, .5);
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
 }
