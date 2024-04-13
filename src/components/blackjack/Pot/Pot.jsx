@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Pot.css';
-import WhiteChip from '../../../assets/white-chip-text.png';
-import BlueChip from '../../../assets/blue-chip-text.png';
-import RedChip from '../../../assets/red-chip-text.png';
-import GreenChip from '../../../assets/green-chip-text.png';
+import WhiteChip from '../../../assets/white-chip.png';
+import BlueChip from '../../../assets/blue-chip.png';
+import RedChip from '../../../assets/red-chip.png';
+import GreenChip from '../../../assets/green-chip.png';
 
 function Pot({ pot }) {
 
@@ -53,19 +53,29 @@ function Pot({ pot }) {
     } else {
       return false;
     }
-  }
+  };
+
+  const whatInThePot = () => {
+    if (pot != 0){
+      return (
+        <h2 id='pot-text'>
+          ${pot}
+        </h2>
+      )
+    } else return null;
+  };
 
 
   return (
     <div id='pot-container'>
       <div id='pot-image-container'>
-        {whitePokerChip ? ( <img src={WhiteChip} /> ) : null}
-        {bluePokerChip ? ( <img src={BlueChip} /> ) : null}
-        {redPokerChip ? ( <img src={RedChip} /> ) : null}
-        {greenPokerChip ? ( <img src={GreenChip} /> ) : null}
+        {whitePokerChip ? ( <img className='pot-chip-images' id='white-chip-pot-image' src={WhiteChip} /> ) : null}
+        {bluePokerChip ? ( <img className='pot-chip-images' id='blue-chip-pot-image' src={BlueChip} /> ) : null}
+        {redPokerChip ? ( <img className='pot-chip-images' id='red-chip-pot-image' src={RedChip} /> ) : null}
+        {greenPokerChip ? ( <img className='pot-chip-images' id='green-chip-pot-image' src={GreenChip} /> ) : null}
+          {whatInThePot()}
       </div>
 
-        {pot}
 
     </div>
   )
