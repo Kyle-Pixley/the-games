@@ -23,7 +23,6 @@ function Pot({ pot }) {
     let potToString = pot.toString();
     let lastDigit = potToString.slice(-1);
     let secondToLastDigit = potToString.slice(-2,-1);
-    console.log(secondToLastDigit)
 
     if (lastDigit === '1' || lastDigit === '2' || lastDigit === '3' || lastDigit === '4') {
       setWhitePokerChip(true);

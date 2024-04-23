@@ -1,0 +1,17 @@
+#game-over-container {
+    background-color: #92fe50;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#player-bust-game-over-hand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#player-bust-game-over-hand > h1 {
+    border: 1px solid black;
+}
+/* only taking effect when i shut down the host and restart it */
