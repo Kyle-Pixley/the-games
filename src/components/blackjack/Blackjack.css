@@ -13,8 +13,8 @@
     height: 32vh;
     position: relative;
     padding-top: 1vh;
-    box-shadow: inset 0px 5px 8px black;
-    background-color: #73fe1f;
+    box-shadow: inset 0px 5px 5px black;
+    background-color: #6ae91d;
 }
 #pre-game-buttons {
     display: flex;

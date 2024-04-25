@@ -1,0 +1,11 @@
+#game-over-container {
+    background-color: #92fe50;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#game-over-text {
+    border: 1px solid black;
+}

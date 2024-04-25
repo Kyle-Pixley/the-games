@@ -9,35 +9,45 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, se
                 i === 1 ? 
                     hiddenCard(card, i)
                     :
-                    <img className='dealers-card-images' id={dealersCardRotation(i)} key={`dealerCardImage${i}`} src={card.image} alt={`Card ${i + 1}`}/>
+                    <img className='dealers-card-images' 
+                    id={dealersCardRotation(i)} 
+                    key={`dealerCardImage${i}`} 
+                    src={card.image} 
+                    alt={`Card ${i + 1}`}/>
             ));
             return cardImages;
         }
     };
 
     const hiddenCard = (card, i) => {
+        const key = isFlipped ? `front-${i}` : `back-${i}`
         return (
             <div id='dealers-card-front-back-container'>
                 {isFlipped ? (
-                    <img className='dealers-card-images' id='dealers-card-number-1' key={`front ${i}`} src={card.image} alt={`Card ${i + 1}`} />
+                    <img className='dealers-card-images' id={`dealers-card-number-${i}`} key={key} src={card.image} alt={`Card ${i + 1}`} />
                     )
                     : (
-                        <img className='dealers-card-images' id='dealers-card-number-1-back' key={`back ${i}`} src='https://deckofcardsapi.com/static/img/back.png' alt={`Back of Card ${i + 1}`} />
+                        <img className='dealers-card-images' id={`dealers-card-number-${i}-back`} key={key} src='https://deckofcardsapi.com/static/img/back.png' alt={`Back of Card ${i + 1}`} />
                     )
                 }  
             </div>
             )
         }
 
-    const dealersCardRotation = (i) => {
-        if(dealersHand.dealersTwoCards.cards.length === 2){
+        const dealersCardRotation = (i) => {
+            const cardLength = dealersHand.dealersTwoCards.cards.length
+            if (i < cardLength) {
+                if (cardLength === 2) {
+                    return `dealers-card-number-${i}`
+                } else if (cardLength === 3) {
+                    return `dealers-card-number-${i}-1`
+                } else if (cardLength === 4) {
+                    return `dealers-card-number-${i}-2`
+                }
+            }
             return `dealers-card-number-${i}`
-        } else if(dealersHand.dealersTwoCards.cards.length === 3) {
-            return `dealers-card-number-${i}-1`
-        } else if(dealersHand.dealersTwoCards.cards.length === 4) {
-            return `dealers-card-number-${i}-2`
-        }
-    };
+        };
+        
 
     const displayDealersScore = () => {
         const totalValue = dealersHand.dealersTwoCards.cards.reduce((acc, card) => {
@@ -84,9 +94,9 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, se
             null;
         } else if (!isFlipped && dealersHand && dealersScore != 0) {
             return (
-                <h2>{dealersScore - dealersScoreValue()}+?</h2>
+                <p>{dealersScore - dealersScoreValue()}+?</p>
             )
-        } else return (<h2>{dealersScore}</h2>)
+        } else return (<p>{dealersScore}</p>)
     };
 
 

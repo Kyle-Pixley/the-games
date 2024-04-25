@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PlayersHand from './playersHand/PlayersHand';
 import DealersHand from './DealersHand/DealersHand';
-import GameOver from '../gameOver/GameOver';
+import GameOver from '../blackjack/gameOver/GameOver';
 import Pot from './Pot/Pot';
 import WhiteChip from '../../assets/white-chip-text.png';
 import BlueChip from '../../assets/blue-chip-text.png';
@@ -218,13 +218,6 @@ function Blackjack() {
 
 
     return (
-    isGameOver ? <GameOver 
-                    playerBust={playerBust}
-                    playersHand={playersHand}
-                    dealersHand={dealersHand}
-                    playerScore={playerScore}
-                    dealersScore={dealersScore} /> 
-                : (
         <div id='blackjack-container'>
             {playerBust ? 
                 playerHasBusted() 
@@ -256,6 +249,8 @@ function Blackjack() {
                     <div id='buttons-for-game'>
                     {!bettingPhase ? null
                     : (
+
+                isGameOver ? <GameOver /> : 
                         <div id='pre-game-buttons'>
                         <button
                         id='draw-cards-button'
@@ -306,7 +301,6 @@ function Blackjack() {
                         )}
                         </div>
         ) 
-    )
 }
 
 export default Blackjack;
