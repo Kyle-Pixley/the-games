@@ -24,7 +24,7 @@ function DealersHand({ dealersHand, dealersScore, setDealersScore, isFlipped, se
         return (
             <div id='dealers-card-front-back-container'>
                 {isFlipped ? (
-                    <img className='dealers-card-images' id={`dealers-card-number-${i}`} key={key} src={card.image} alt={`Card ${i + 1}`} />
+                    <img className='dealers-card-images' id={dealersCardRotation(i)} key={key} src={card.image} alt={`Card ${i + 1}`} />
                     )
                     : (
                         <img className='dealers-card-images' id={`dealers-card-number-${i}-back`} key={key} src='https://deckofcardsapi.com/static/img/back.png' alt={`Back of Card ${i + 1}`} />

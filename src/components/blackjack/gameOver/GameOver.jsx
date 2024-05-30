@@ -1,5 +1,5 @@
 import React from 'react';
-import '../gameOver/gameOver.css'
+import './GameOver.css'
 
 function GameOver() {
 

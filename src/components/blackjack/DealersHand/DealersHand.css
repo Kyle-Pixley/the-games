@@ -1,16 +1,24 @@
 #dealers-hand-container {
     height: 34%;
+    width: 100%;
 }
 #dealers-spot-container {
     display: flex;
     justify-content: space-between;
-    padding: 0 5em;
+    width: 100%;
 }
 #dealers-score {
     font-size: 3vw;
+    margin-left: 6vw;
+    margin-top: 4vw;
 }
 #dealers-card-images-container {
+    display: flex;
+    justify-content: flex-end;
+    height: fit-content;
     margin-top: 3vh;
+    width: 50%;
+    margin-right: 10vw;
 }
 .dealers-card-images {
     position: relative;
@@ -23,7 +31,6 @@
 #dealers-card-front-back-container {
     display: inline-block;
     position: relative;
-
     perspective: 1000px;
 }
 #dealers-card-number-1-back{
@@ -52,21 +59,19 @@
 
 #dealers-card-number-0-2{
     animation: slide-rotate-25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    margin-right: -6em;
+    margin-right: -4.5em;
 }
 #dealers-card-number-1-2{
     animation: slide-rotate-15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    margin-bottom: 1em;
-    margin-right: -3em;
+    margin-right: -1.6em;
 }
 #dealers-card-number-2-2{
     animation: slide-rotate15 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    margin-bottom: 1em;
     margin-left: -3em;
 }
 #dealers-card-number-3-2{
     animation: slide-rotate25 .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    margin-left: -6em;
+    margin-left: -4em;
 }
 
 
@@ -149,5 +154,8 @@
     }
     .dealers-card-images {
         width: 22vw;
+    }
+    #dealers-score {
+        font-size: 21px;
     }
 }
