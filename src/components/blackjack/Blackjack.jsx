@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PlayersHand from './playersHand/PlayersHand';
 import DealersHand from './DealersHand/DealersHand';
+import GameOver from '../blackjack/gameOver/GameOver';
 import Pot from './Pot/Pot';
 import WhiteChip from '../../assets/white-chip-text.png';
 import BlueChip from '../../assets/blue-chip-text.png';
@@ -25,6 +26,7 @@ function Blackjack() {
     const [ bettingPhase, setBettingPhase ] = useState(true);
     const [ roundNumber, setRoundNumber ] = useState(0);
     const [ isNoMoney, setIsNoMoney ] = useState(false);
+    const [ isGameOver, setIsGameOver ] = useState(false);
 
     const nextRound = () => {
         setRoundNumber(roundNumber + 1);
@@ -64,7 +66,13 @@ function Blackjack() {
         if(deck != '' && !bettingPhase) {
             drawTwoCards();
         }
-    },[bettingPhase])
+    },[bettingPhase]);
+
+    useEffect(() => {
+        if(playerPoints === 0 && pot === 0) {
+            setIsGameOver(true);
+        }
+    }, [playerPoints, pot]);
     
     const drawTwoCards = () => {
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
@@ -206,91 +214,93 @@ function Blackjack() {
                     </div>
             </div>
         )
-    }
+    };
 
 
     return (
         <div id='blackjack-container'>
             {playerBust ? 
-            playerHasBusted() 
-            : (
-                <div id='playing-the-game'>
-                
-                <DealersHand 
-                deck={deck}
-                dealersHand={dealersHand}
-                dealersScore={dealersScore}
-                setDealersScore={setDealersScore}
-                isFlipped={isFlipped}
-                setIsFlipped={setIsFlipped} 
-                setDealerBust={setDealerBust}/>
-                
-                <Pot pot={pot} setPot={setPot}/>
-                
-            <PlayersHand 
-            playersHand={playersHand} 
-            playerScore={playerScore} 
-            setPlayerScore={setPlayerScore} 
-            playerPoints={playerPoints}
-            setPlayerPoints={setPlayerPoints}
-            className='players-hand'
-            playerBust={playerBust}
-            setPlayerBust={setPlayerBust} 
-            setPot={setPot}/>
-
-            <div id='buttons-for-game'>
-                {!bettingPhase ? null
+                playerHasBusted() 
+                : (
+                    <div id='playing-the-game'>
+                    
+                    <DealersHand 
+                    deck={deck}
+                    dealersHand={dealersHand}
+                    dealersScore={dealersScore}
+                    setDealersScore={setDealersScore}
+                    isFlipped={isFlipped}
+                    setIsFlipped={setIsFlipped} 
+                    setDealerBust={setDealerBust}/>
+                    
+                    <Pot pot={pot} setPot={setPot}/>
+                    
+                    <PlayersHand 
+                    playersHand={playersHand} 
+                    playerScore={playerScore} 
+                    setPlayerScore={setPlayerScore} 
+                    playerPoints={playerPoints}
+                    setPlayerPoints={setPlayerPoints}
+                    className='players-hand'
+                    playerBust={playerBust}
+                    setPlayerBust={setPlayerBust} 
+                    setPot={setPot}/>
+                    
+                    <div id='buttons-for-game'>
+                    {!bettingPhase ? null
                     : (
+
+                isGameOver ? <GameOver /> : 
                         <div id='pre-game-buttons'>
                         <button
                         id='draw-cards-button'
                         onClick={() => setBettingPhase(false)}>Start Round</button>
                         <div id='bet-container'>
-                            <h3 id='bet-amount-text'>Bet Amount</h3>
-                            <div id='bet-button-container'>
-                                <button
-                                onClick={() => addToPot(1)}
-                                className='bet-buttons'>
-                                    <img 
-                                    id='bet-image-1'
-                                    className='bet-images' 
-                                    src={WhiteChip}/>
-                                </button>
-                                <button
-                                onClick={() => addToPot(5)}
-                                className='bet-buttons'>
-                                    <img 
-                                    id='bet-image-5'
-                                    className='bet-images' 
-                                    src={BlueChip}/>
-                                </button>
-                                <button
-                                onClick={() => addToPot(10)}
-                                className='bet-buttons'>
-                                    <img 
-                                    id='bet-image-10'
-                                    className='bet-images' 
-                                    src={RedChip}/>
-                                </button>
-                                <button
-                                onClick={() => addToPot(50)}
-                                className='bet-buttons'>
-                                    <img 
-                                    id='bet-image-50'
-                                    className='bet-images' 
-                                    src={GreenChip}/>
-                                </button>
-                            </div>
+                        <h3 id='bet-amount-text'>Bet Amount</h3>
+                        <div id='bet-button-container'>
+                        <button
+                        onClick={() => addToPot(1)}
+                        className='bet-buttons'>
+                        <img 
+                        id='bet-image-1'
+                        className='bet-images' 
+                        src={WhiteChip}/>
+                        </button>
+                        <button
+                        onClick={() => addToPot(5)}
+                        className='bet-buttons'>
+                        <img 
+                        id='bet-image-5'
+                        className='bet-images' 
+                        src={BlueChip}/>
+                        </button>
+                        <button
+                        onClick={() => addToPot(10)}
+                        className='bet-buttons'>
+                        <img 
+                        id='bet-image-10'
+                        className='bet-images' 
+                        src={RedChip}/>
+                        </button>
+                        <button
+                        onClick={() => addToPot(50)}
+                        className='bet-buttons'>
+                        <img 
+                        id='bet-image-50'
+                        className='bet-images' 
+                        src={GreenChip}/>
+                        </button>
                         </div>
-                    </div>
-                    )}
-                {hitMoreCardsButton()}
-                <h2 id='player-points'>${playerPoints}</h2>
-            </div>
-            </div>
-            )}
-        </div>
-    )
+                        </div>
+                        </div>
+                        )}
+                        {hitMoreCardsButton()}
+                        <h2 id='player-points'>${playerPoints}</h2>
+                        </div>
+                        </div>
+                        )}
+                        </div>
+        ) 
 }
 
 export default Blackjack;
